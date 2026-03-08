@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, Bug, Play } from "lucide-react";
 import { getGameBySlug, statusConfig } from "@/data/games";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import { trackEvent } from "@/lib/analytics";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },

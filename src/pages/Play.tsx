@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor } from "lucide-react";
@@ -8,6 +8,7 @@ import ScoreSubmitModal from "@/components/ScoreSubmitModal";
 import { getGameBySlug } from "@/data/games";
 import { qualifiesForLeaderboard, addLeaderboardEntry } from "@/lib/leaderboard";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import { trackEvent } from "@/lib/analytics";
 
 const Play = () => {
   const { slug } = useParams<{ slug: string }>();

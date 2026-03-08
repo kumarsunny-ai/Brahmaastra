@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, Star, Share2, Copy, Check } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 interface ScoreSubmitModalProps {
   open: boolean;

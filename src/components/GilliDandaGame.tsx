@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 /* ─── Types ─── */
 type Phase = "ready" | "playing" | "hit" | "miss" | "gameover";
