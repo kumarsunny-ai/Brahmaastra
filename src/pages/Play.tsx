@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor } from "lucide-react";
@@ -8,6 +8,7 @@ import ScoreSubmitModal from "@/components/ScoreSubmitModal";
 import { getGameBySlug } from "@/data/games";
 import { qualifiesForLeaderboard, addLeaderboardEntry } from "@/lib/leaderboard";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import { trackEvent } from "@/lib/analytics";
 
 const Play = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -22,6 +23,10 @@ const Play = () => {
   const [isNewRecord, setIsNewRecord] = useState(false);
 
   useDocumentTitle(game ? `Play ${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
+
+  useEffect(() => {
+    if (resolvedSlug === "gilli-panda") trackEvent("gilli_panda_play_view");
+  }, [resolvedSlug]);
 
   const isSupported = typeof window !== "undefined" && !!window.requestAnimationFrame && !!window.HTMLCanvasElement;
 

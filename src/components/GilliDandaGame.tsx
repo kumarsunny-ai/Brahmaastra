@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 /* ─── Types ─── */
 type Phase = "ready" | "playing" | "hit" | "miss" | "gameover";
@@ -177,12 +178,14 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
         s.hitMessageTimer = 45;
 
         setUiScore(s.score);
+        trackEvent("successful_hit", { points: totalPoints, combo: s.combo, precision: Math.round(precision * 100) });
       }
     }
   }, [spawnParticles]);
 
   /* ─── Start game ─── */
   const startGame = useCallback(() => {
+    trackEvent("game_start");
     const s = stateRef.current;
     s.phase = "playing";
     s.score = 0;
@@ -247,6 +250,7 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
               s.flashColor = c.miss;
               s.hitMessage = "Miss! ❌";
               s.hitMessageTimer = 40;
+              trackEvent("miss", { livesLeft: s.lives - 1 });
               spawnParticles(s.gilli.x, s.gilli.y, c.miss, 8);
               s.gilli = null;
               s.spawnTimer = 40;
@@ -260,6 +264,7 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
                 }
                 setUiPhase("gameover");
                 setUiScore(s.score);
+                trackEvent("game_over", { score: s.score, newRecord: s.score >= s.bestScore });
                 onGameOver?.(s.score);
               }
             }

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, Star, Share2, Copy, Check } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 interface ScoreSubmitModalProps {
   open: boolean;
@@ -33,12 +34,14 @@ const ScoreSubmitModal = ({ open, score, isNewRecord, onSubmit, onSkip }: ScoreS
     const trimmed = name.trim() || "Anonymous";
     localStorage.setItem("gilliPanda_playerName", trimmed);
     setSubmitted(true);
+    trackEvent("leaderboard_submit", { score, playerName: trimmed });
     onSubmit(trimmed);
   };
 
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(`${shareText}\n${SHARE_URL}`);
+      trackEvent("score_shared", { method: "clipboard", score });
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -62,6 +65,7 @@ const ScoreSubmitModal = ({ open, score, isNewRecord, onSubmit, onSkip }: ScoreS
           text: shareText,
           url: SHARE_URL,
         });
+        trackEvent("score_shared", { method: "native", score });
       } catch {
         // User cancelled share — do nothing
       }

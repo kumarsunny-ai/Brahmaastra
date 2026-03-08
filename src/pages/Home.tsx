@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Gamepad2, Zap, Globe, Heart, ArrowRight, Code2, Users, Flame } from "lucide-react";
@@ -6,6 +7,7 @@ import SectionHeading from "@/components/SectionHeading";
 import GameCard from "@/components/GameCard";
 import { games } from "@/data/games";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import { trackEvent } from "@/lib/analytics";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -24,6 +26,7 @@ const philosophy = [
 
 const Home = () => {
   useDocumentTitle("Brahmaastra — Indie Games with Desi Soul & Global Fun");
+  useEffect(() => { trackEvent("homepage_view"); }, []);
   return (
     <div className="min-h-screen pt-16">
       {/* Hero */}
