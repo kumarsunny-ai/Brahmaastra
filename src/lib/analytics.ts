@@ -15,7 +15,10 @@ export type AnalyticsEvent =
   | "miss"
   | "game_over"
   | "leaderboard_submit"
-  | "score_shared";
+  | "score_shared"
+  | "angle_locked"
+  | "power_locked"
+  | "round_complete";
 
 type EventProperties = Record<string, string | number | boolean | undefined>;
 
