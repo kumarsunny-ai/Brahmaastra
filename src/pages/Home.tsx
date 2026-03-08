@@ -37,7 +37,7 @@ const Home = () => {
           </motion.div>
 
           <motion.h1 custom={1} variants={fadeUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold text-foreground mb-6 leading-[1.1]">
-            <span className="logo-text">Brahmaastra</span>
+            <span className="logo-text">Brahmastra</span>
             <br />
             <span className="gradient-text">Indie Games</span>
           </motion.h1>

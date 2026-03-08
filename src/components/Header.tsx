@@ -19,7 +19,7 @@ const Header = () => {
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to="/" className="logo-text text-xl tracking-tight flex items-center gap-2">
           <span className="text-2xl">⚡</span>
-          BRAHMAASTRA
+          BRAHMASTRA
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">

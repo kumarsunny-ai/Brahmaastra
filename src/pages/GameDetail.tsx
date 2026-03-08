@@ -79,7 +79,7 @@ const GameDetail = () => {
                   </Link>
                 )}
                 <a
-                  href="mailto:hello@brahmaastra.com?subject=Bug Report"
+                  href="mailto:hello@brahmastra.com?subject=Bug Report"
                   className="inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-xl border border-border/60 text-foreground bg-secondary/50 hover:bg-secondary transition-all"
                 >
                   <Bug size={16} /> Report Bug
