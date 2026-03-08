@@ -259,6 +259,8 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
                   setUiBest(s.score);
                 }
                 setUiPhase("gameover");
+                setUiScore(s.score);
+                onGameOver?.(s.score);
               }
             }
           } else {
