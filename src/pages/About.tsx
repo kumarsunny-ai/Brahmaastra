@@ -11,7 +11,7 @@ const About = () => {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
       <div className="container mx-auto max-w-3xl">
-        <SectionHeading title="About Brahmastra" subtitle="An indie studio on a mission to make games that matter." />
+        <SectionHeading title="About Brahmaastra" subtitle="An indie studio on a mission to make games that matter." />
 
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="prose prose-invert max-w-none mb-16">
           <div className="bg-card border border-border rounded-xl p-8 text-muted-foreground leading-relaxed space-y-4">
