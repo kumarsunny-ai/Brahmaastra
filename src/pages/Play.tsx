@@ -150,9 +150,9 @@ const Play = () => {
             className="relative rounded-2xl border border-border/50 bg-card overflow-hidden"
             style={{ minHeight: "520px" }}
           >
-            {isGilliPanda && isPlayable ? (
+            {isPlayable && gameComponent ? (
               gameStarted ? (
-                <GilliDandaGame onGameOver={handleGameOver} inputBlocked={showSubmit} />
+                gameComponent
               ) : (
                 /* Start Screen */
                 <div className="flex flex-col items-center justify-center h-full min-h-[520px] gap-6 px-4">
