@@ -33,7 +33,7 @@ const BrahmaastraLogo = ({ size = "md" }: { size?: "sm" | "md" | "lg" }) => {
       </svg>
 
       {/* Full text */}
-      <span className="relative">
+      <span className="relative text-foreground font-bold">
         BRAHMAASTRA
 
         {/* Electricity beam sweeping across */}
