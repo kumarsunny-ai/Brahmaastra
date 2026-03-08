@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Gamepad2, Zap, Globe, Heart, ArrowRight } from "lucide-react";
+import WaitlistSignup from "@/components/WaitlistSignup";
 import SectionHeading from "@/components/SectionHeading";
 import GameCard from "@/components/GameCard";
 
