@@ -13,12 +13,7 @@ const fadeUp = {
 
 const featuredGame = games.find((g) => g.featured)!;
 
-const roadmap = [
-  { icon: Sparkles, label: "Now", title: "Gilli Panda MVP", desc: "Playable in browser — power, angle, score!" },
-  { icon: Target, label: "Next", title: "Leaderboards & Multiplayer", desc: "Compete with friends and climb the ranks." },
-  { icon: Palette, label: "Soon", title: "New Game Titles", desc: "AutoRickshaw Rampage, Chai Tapper, and more." },
-  { icon: Rocket, label: "Vision", title: "Brahmaastra Platform", desc: "A home for culturally inspired indie games." },
-];
+
 
 const philosophy = [
   { icon: Flame, title: "Culture Meets Play", desc: "We draw from rich Indian traditions and reimagine them as games the whole world can enjoy." },
