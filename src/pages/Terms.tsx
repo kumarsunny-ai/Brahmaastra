@@ -10,7 +10,7 @@ const Terms = () => (
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Use of Service</h3>
         <p>Our games are provided free for personal, non-commercial use. You may not reverse-engineer, redistribute, or commercially exploit our content without permission.</p>
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Intellectual Property</h3>
-        <p>All game assets, code, designs, and branding are owned by Brahmastra. You may not copy or reproduce them without written consent.</p>
+        <p>All game assets, code, designs, and branding are owned by Brahmaastra. You may not copy or reproduce them without written consent.</p>
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Disclaimer</h3>
         <p>Our games are provided "as is" without warranties. We're not liable for any damages arising from your use of our services.</p>
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Changes</h3>
