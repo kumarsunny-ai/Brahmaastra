@@ -46,10 +46,11 @@ function getCSSColor(varName: string, fallback: string): string {
 
 interface GilliDandaGameProps {
   onGameOver?: (score: number) => void;
+  inputBlocked?: boolean;
 }
 
 /* ─── Main Component ─── */
-const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
+const GilliDandaGame = ({ onGameOver, inputBlocked }: GilliDandaGameProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
@@ -250,7 +251,7 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
               s.flashColor = c.miss;
               s.hitMessage = "Miss! ❌";
               s.hitMessageTimer = 40;
-              trackEvent("miss", { livesLeft: s.lives - 1 });
+              trackEvent("miss", { livesLeft: s.lives });
               spawnParticles(s.gilli.x, s.gilli.y, c.miss, 8);
               s.gilli = null;
               s.spawnTimer = 40;
@@ -490,66 +491,79 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
           ctx.fillStyle = c.muted;
           ctx.fillText(`Level ${Math.floor(s.difficulty)}`, CANVAS_W / 2, CANVAS_H - 15);
         }
+
+        // Subtle branding watermark
+        ctx.textAlign = "right";
+        ctx.font = "10px 'Space Grotesk', sans-serif";
+        ctx.fillStyle = "rgba(255,255,255,0.12)";
+        ctx.fillText("brahmaastra.com", CANVAS_W - 12, CANVAS_H - 10);
       }
 
       // Ready screen
       if (s.phase === "ready") {
         // Dim overlay
-        ctx.fillStyle = "rgba(0,0,0,0.5)";
+        ctx.fillStyle = "rgba(0,0,0,0.55)";
         ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
 
         ctx.textAlign = "center";
+
+        // Brahmaastra branding
+        ctx.font = "12px 'Space Grotesk', sans-serif";
+        ctx.fillStyle = c.muted;
+        ctx.fillText("brahmaastra.com", CANVAS_W / 2, 130);
+
         ctx.font = "bold 48px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.fg;
-        ctx.fillText("🏏 Gilli Panda", CANVAS_W / 2, 180);
+        ctx.fillText("🏏 Gilli Panda", CANVAS_W / 2, 185);
 
-        ctx.font = "18px 'Inter', sans-serif";
+        ctx.font = "16px 'Inter', sans-serif";
         ctx.fillStyle = c.muted;
         ctx.fillText("Time your swings to hit the gilli!", CANVAS_W / 2, 220);
+
+        // Controls hint
+        ctx.font = "13px 'Inter', sans-serif";
+        ctx.fillStyle = "rgba(255,255,255,0.3)";
+        ctx.fillText("Click · Tap · Spacebar", CANVAS_W / 2, 260);
 
         // Animated prompt
         const pulse = 0.7 + Math.sin(Date.now() / 400) * 0.3;
         ctx.globalAlpha = pulse;
-        ctx.font = "bold 22px 'Space Grotesk', sans-serif";
+        ctx.font = "bold 24px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.accent;
-        ctx.fillText("Click or Tap to Start", CANVAS_W / 2, 300);
+        ctx.fillText("▶  Start Game", CANVAS_W / 2, 320);
         ctx.globalAlpha = 1;
-
-        ctx.font = "14px 'Inter', sans-serif";
-        ctx.fillStyle = c.muted;
-        ctx.fillText("Click / Tap / Spacebar to swing", CANVAS_W / 2, 340);
 
         if (s.bestScore > 0) {
           ctx.font = "16px 'Space Grotesk', sans-serif";
           ctx.fillStyle = c.score;
-          ctx.fillText(`🏆 Best: ${s.bestScore}`, CANVAS_W / 2, 380);
+          ctx.fillText(`🏆 Best: ${s.bestScore}`, CANVAS_W / 2, 370);
         }
       }
 
       // Game over screen
       if (s.phase === "gameover") {
-        ctx.fillStyle = "rgba(0,0,0,0.6)";
+        ctx.fillStyle = "rgba(0,0,0,0.65)";
         ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
 
         ctx.textAlign = "center";
-        ctx.font = "bold 44px 'Space Grotesk', sans-serif";
+        ctx.font = "bold 40px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.miss;
-        ctx.fillText("Game Over", CANVAS_W / 2, 170);
+        ctx.fillText("Game Over", CANVAS_W / 2, 160);
 
-        ctx.font = "bold 64px 'Space Grotesk', sans-serif";
+        ctx.font = "bold 72px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.score;
-        ctx.fillText(String(s.score), CANVAS_W / 2, 250);
+        ctx.fillText(String(s.score), CANVAS_W / 2, 245);
 
-        ctx.font = "18px 'Inter', sans-serif";
+        ctx.font = "16px 'Inter', sans-serif";
         ctx.fillStyle = c.muted;
-        ctx.fillText("points", CANVAS_W / 2, 275);
+        ctx.fillText("points", CANVAS_W / 2, 272);
 
         if (s.score >= s.bestScore && s.score > 0) {
           ctx.font = "bold 20px 'Space Grotesk', sans-serif";
           ctx.fillStyle = c.accent;
           ctx.fillText("🌟 New Record!", CANVAS_W / 2, 310);
         } else {
-          ctx.font = "16px 'Inter', sans-serif";
+          ctx.font = "14px 'Inter', sans-serif";
           ctx.fillStyle = c.muted;
           ctx.fillText(`Best: ${s.bestScore}`, CANVAS_W / 2, 310);
         }
@@ -558,8 +572,13 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
         ctx.globalAlpha = pulse2;
         ctx.font = "bold 22px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.accent;
-        ctx.fillText("Click or Tap to Retry", CANVAS_W / 2, 370);
+        ctx.fillText("▶  Play Again", CANVAS_W / 2, 370);
         ctx.globalAlpha = 1;
+
+        // Branding
+        ctx.font = "11px 'Space Grotesk', sans-serif";
+        ctx.fillStyle = "rgba(255,255,255,0.2)";
+        ctx.fillText("brahmaastra.com", CANVAS_W / 2, 420);
       }
 
       rafRef.current = requestAnimationFrame(loop);
@@ -571,13 +590,14 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
 
   /* ─── Input handlers ─── */
   const handleInput = useCallback(() => {
+    if (inputBlocked) return;
     const s = stateRef.current;
     if (s.phase === "ready" || s.phase === "gameover") {
       startGame();
     } else if (s.phase === "playing") {
       handleSwing();
     }
-  }, [startGame, handleSwing]);
+  }, [startGame, handleSwing, inputBlocked]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
