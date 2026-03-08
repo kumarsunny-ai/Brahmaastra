@@ -28,9 +28,7 @@ const Header = () => {
               key={link.to}
               to={link.to}
               className={`text-sm font-medium transition-all duration-200 relative group ${
-                location.pathname === link.to
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                location.pathname === link.to ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {link.label}
@@ -42,7 +40,7 @@ const Header = () => {
         </nav>
 
         <Link
-          to="/play"
+          to="/play/gilli-panda"
           className="hidden md:inline-flex text-sm font-medium px-5 py-2 rounded-lg gradient-bg text-primary-foreground hover:opacity-90 transition-all duration-200 hover-lift"
         >
           Play Now
@@ -67,19 +65,12 @@ const Header = () => {
             className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50 px-4 pb-4 overflow-hidden"
           >
             {navLinks.map((link, i) => (
-              <motion.div
-                key={link.to}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.05 }}
-              >
+              <motion.div key={link.to} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
                 <Link
                   to={link.to}
                   onClick={() => setOpen(false)}
                   className={`block py-3 text-sm font-medium transition-colors ${
-                    location.pathname === link.to
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                    location.pathname === link.to ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {link.label}
@@ -87,7 +78,7 @@ const Header = () => {
               </motion.div>
             ))}
             <Link
-              to="/play"
+              to="/play/gilli-panda"
               onClick={() => setOpen(false)}
               className="inline-flex mt-2 text-sm font-medium px-5 py-2.5 rounded-lg gradient-bg text-primary-foreground"
             >
