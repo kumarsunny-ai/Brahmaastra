@@ -43,8 +43,12 @@ function getCSSColor(varName: string, fallback: string): string {
   return val ? `hsl(${val})` : fallback;
 }
 
+interface GilliDandaGameProps {
+  onGameOver?: (score: number) => void;
+}
+
 /* ─── Main Component ─── */
-const GilliDandaGame = () => {
+const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
@@ -255,6 +259,8 @@ const GilliDandaGame = () => {
                   setUiBest(s.score);
                 }
                 setUiPhase("gameover");
+                setUiScore(s.score);
+                onGameOver?.(s.score);
               }
             }
           } else {
