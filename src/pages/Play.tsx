@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor } from "lucide-react";
 import GilliDandaGame from "@/components/GilliDandaGame";
+import Leaderboard from "@/components/Leaderboard";
+import ScoreSubmitModal from "@/components/ScoreSubmitModal";
 import { getGameBySlug } from "@/data/games";
+import { qualifiesForLeaderboard, addLeaderboardEntry } from "@/lib/leaderboard";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const Play = () => {
@@ -11,10 +14,35 @@ const Play = () => {
   const resolvedSlug = slug || "gilli-panda";
   const game = getGameBySlug(resolvedSlug);
   const [gameStarted, setGameStarted] = useState(false);
+  const [leaderboardKey, setLeaderboardKey] = useState(0);
+
+  // Score submit modal state
+  const [showSubmit, setShowSubmit] = useState(false);
+  const [lastScore, setLastScore] = useState(0);
+  const [isNewRecord, setIsNewRecord] = useState(false);
 
   useDocumentTitle(game ? `Play ${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
 
   const isSupported = typeof window !== "undefined" && !!window.requestAnimationFrame && !!window.HTMLCanvasElement;
+
+  const handleGameOver = useCallback((score: number) => {
+    setLastScore(score);
+    const bestScore = parseInt(localStorage.getItem("gilliPanda_best") || "0");
+    setIsNewRecord(score >= bestScore && score > 0);
+    if (qualifiesForLeaderboard(score)) {
+      setShowSubmit(true);
+    }
+  }, []);
+
+  const handleScoreSubmit = useCallback((name: string) => {
+    addLeaderboardEntry(name, lastScore);
+    setShowSubmit(false);
+    setLeaderboardKey((k) => k + 1);
+  }, [lastScore]);
+
+  const handleScoreSkip = useCallback(() => {
+    setShowSubmit(false);
+  }, []);
 
   // Unsupported browser
   if (!isSupported) {
@@ -55,6 +83,15 @@ const Play = () => {
 
   return (
     <div className="min-h-screen pt-20 pb-16">
+      {/* Score Submit Modal */}
+      <ScoreSubmitModal
+        open={showSubmit}
+        score={lastScore}
+        isNewRecord={isNewRecord}
+        onSubmit={handleScoreSubmit}
+        onSkip={handleScoreSkip}
+      />
+
       {/* Nav Bar */}
       <div className="bg-card/60 backdrop-blur-sm border-b border-border/50 sticky top-16 z-40">
         <div className="container mx-auto max-w-5xl flex items-center justify-between px-4 py-3">
@@ -84,102 +121,126 @@ const Play = () => {
         </div>
       </div>
 
-      {/* Game Container */}
+      {/* Game + Leaderboard layout */}
       <div className="container mx-auto max-w-5xl px-4 mt-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="relative rounded-2xl border border-border/50 bg-card overflow-hidden"
-          style={{ minHeight: "520px" }}
-        >
-          {isGilliPanda && isPlayable ? (
-            gameStarted ? (
-              <GilliDandaGame />
+        <div className="grid lg:grid-cols-[1fr_300px] gap-6">
+          {/* Game Container */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="relative rounded-2xl border border-border/50 bg-card overflow-hidden"
+            style={{ minHeight: "520px" }}
+          >
+            {isGilliPanda && isPlayable ? (
+              gameStarted ? (
+                <GilliDandaGame onGameOver={handleGameOver} />
+              ) : (
+                /* Start Screen */
+                <div className="flex flex-col items-center justify-center h-full min-h-[520px] gap-6 px-4">
+                  <motion.div
+                    className="text-7xl"
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    {game.emoji}
+                  </motion.div>
+                  <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground text-center">
+                    {game.title}
+                  </h2>
+                  <p className="text-muted-foreground text-center max-w-md">
+                    {game.description}
+                  </p>
+                  <button
+                    onClick={() => setGameStarted(true)}
+                    className="group inline-flex items-center gap-2 text-base font-medium px-8 py-4 rounded-xl gradient-bg text-primary-foreground glow-primary hover:opacity-90 transition-all duration-300"
+                  >
+                    <PlayIcon size={20} fill="currentColor" /> Start Game
+                  </button>
+                </div>
+              )
             ) : (
-              /* Start Screen */
+              /* Not-ready placeholder */
               <div className="flex flex-col items-center justify-center h-full min-h-[520px] gap-6 px-4">
                 <motion.div
                   className="text-7xl"
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                 >
                   {game.emoji}
                 </motion.div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground text-center">
+                <Loader2 size={28} className="animate-spin text-primary" />
+                <h2 className="font-display text-2xl font-bold text-foreground text-center">
                   {game.title}
                 </h2>
-                <p className="text-muted-foreground text-center max-w-md">
-                  {game.description}
+                <p className="text-muted-foreground text-center max-w-sm">
+                  Playable build coming soon. This game is currently <strong className="text-foreground">{game.statusLabel.toLowerCase()}</strong>.
                 </p>
-                <button
-                  onClick={() => setGameStarted(true)}
-                  className="group inline-flex items-center gap-2 text-base font-medium px-8 py-4 rounded-xl gradient-bg text-primary-foreground glow-primary hover:opacity-90 transition-all duration-300"
-                >
-                  <PlayIcon size={20} fill="currentColor" /> Start Game
-                </button>
+                <div className="flex gap-3 flex-wrap justify-center">
+                  <Link
+                    to="/games"
+                    className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-xl bg-secondary border border-border/50 text-secondary-foreground hover:bg-secondary/80 transition-all"
+                  >
+                    <Gamepad2 size={16} /> Back to Games
+                  </Link>
+                  <Link
+                    to="/"
+                    className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-xl bg-secondary border border-border/50 text-secondary-foreground hover:bg-secondary/80 transition-all"
+                  >
+                    <Home size={16} /> Back to Home
+                  </Link>
+                </div>
               </div>
-            )
-          ) : (
-            /* Not-ready placeholder */
-            <div className="flex flex-col items-center justify-center h-full min-h-[520px] gap-6 px-4">
-              <motion.div
-                className="text-7xl"
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                {game.emoji}
-              </motion.div>
-              <Loader2 size={28} className="animate-spin text-primary" />
-              <h2 className="font-display text-2xl font-bold text-foreground text-center">
-                {game.title}
-              </h2>
-              <p className="text-muted-foreground text-center max-w-sm">
-                Playable build coming soon. This game is currently <strong className="text-foreground">{game.statusLabel.toLowerCase()}</strong>.
-              </p>
-              <div className="flex gap-3 flex-wrap justify-center">
-                <Link
-                  to="/games"
-                  className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-xl bg-secondary border border-border/50 text-secondary-foreground hover:bg-secondary/80 transition-all"
-                >
-                  <Gamepad2 size={16} /> Back to Games
-                </Link>
-                <Link
-                  to="/"
-                  className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-xl bg-secondary border border-border/50 text-secondary-foreground hover:bg-secondary/80 transition-all"
-                >
-                  <Home size={16} /> Back to Home
-                </Link>
-              </div>
-            </div>
-          )}
-        </motion.div>
+            )}
+          </motion.div>
 
-        {/* Game Controls */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="mt-8"
-        >
-          <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-            <Keyboard size={18} className="text-primary" /> Game Controls
-          </h3>
-          <div className="grid sm:grid-cols-3 gap-4">
-            <div className="bg-card border border-border/50 rounded-xl p-5">
-              <span className="text-foreground font-medium text-sm">Click / Tap / Space</span>
-              <p className="text-muted-foreground text-xs mt-1">Swing the bat when the gilli is in range</p>
+          {/* Leaderboard sidebar (desktop) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="hidden lg:block"
+          >
+            <Leaderboard refreshKey={leaderboardKey} />
+          </motion.div>
+        </div>
+
+        {/* Game Controls + Mobile Leaderboard */}
+        <div className="grid lg:grid-cols-[1fr_300px] gap-6 mt-8">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
+            <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <Keyboard size={18} className="text-primary" /> Game Controls
+            </h3>
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div className="bg-card border border-border/50 rounded-xl p-5">
+                <span className="text-foreground font-medium text-sm">Click / Tap / Space</span>
+                <p className="text-muted-foreground text-xs mt-1">Swing the bat when the gilli is in range</p>
+              </div>
+              <div className="bg-card border border-border/50 rounded-xl p-5">
+                <span className="text-foreground font-medium text-sm">Timing is Key</span>
+                <p className="text-muted-foreground text-xs mt-1">Hit the gilli at the perfect moment for max points</p>
+              </div>
+              <div className="bg-card border border-border/50 rounded-xl p-5">
+                <span className="text-foreground font-medium text-sm">Build Combos</span>
+                <p className="text-muted-foreground text-xs mt-1">Chain hits for combo multipliers — 3 misses and it's over</p>
+              </div>
             </div>
-            <div className="bg-card border border-border/50 rounded-xl p-5">
-              <span className="text-foreground font-medium text-sm">Timing is Key</span>
-              <p className="text-muted-foreground text-xs mt-1">Hit the gilli at the perfect moment for max points</p>
-            </div>
-            <div className="bg-card border border-border/50 rounded-xl p-5">
-              <span className="text-foreground font-medium text-sm">Build Combos</span>
-              <p className="text-muted-foreground text-xs mt-1">Chain hits for combo multipliers — 3 misses and it's over</p>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          {/* Leaderboard (mobile — below controls) */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.25 }}
+            className="lg:hidden"
+          >
+            <Leaderboard refreshKey={leaderboardKey} />
+          </motion.div>
+        </div>
       </div>
     </div>
   );
