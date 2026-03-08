@@ -1,6 +1,9 @@
 import SectionHeading from "@/components/SectionHeading";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
-const Terms = () => (
+const Terms = () => {
+  useDocumentTitle("Terms of Use — Brahmaastra");
+  return (
   <div className="min-h-screen pt-24 pb-16 px-4">
     <div className="container mx-auto max-w-2xl">
       <SectionHeading title="Terms of Use" gradient={false} />
@@ -20,6 +23,7 @@ const Terms = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default Terms;

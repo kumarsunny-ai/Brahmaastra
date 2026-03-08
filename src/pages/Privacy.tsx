@@ -1,6 +1,9 @@
 import SectionHeading from "@/components/SectionHeading";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
-const Privacy = () => (
+const Privacy = () => {
+  useDocumentTitle("Privacy Policy — Brahmaastra");
+  return (
   <div className="min-h-screen pt-24 pb-16 px-4">
     <div className="container mx-auto max-w-2xl">
       <SectionHeading title="Privacy Policy" gradient={false} />
@@ -18,6 +21,7 @@ const Privacy = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default Privacy;

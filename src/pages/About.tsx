@@ -1,6 +1,7 @@
 import SectionHeading from "@/components/SectionHeading";
 import { motion } from "framer-motion";
 import { Target, Palette, Rocket } from "lucide-react";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -8,6 +9,7 @@ const fadeUp = {
 };
 
 const About = () => {
+  useDocumentTitle("About — Brahmaastra");
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
       <div className="container mx-auto max-w-3xl">

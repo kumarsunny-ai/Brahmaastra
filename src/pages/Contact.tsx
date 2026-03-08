@@ -3,6 +3,7 @@ import { z } from "zod";
 import SectionHeading from "@/components/SectionHeading";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Send } from "lucide-react";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be under 100 characters"),
@@ -14,6 +15,7 @@ type ContactForm = z.infer<typeof contactSchema>;
 type FormErrors = Partial<Record<keyof ContactForm, string>>;
 
 const Contact = () => {
+  useDocumentTitle("Contact — Brahmaastra");
   const { toast } = useToast();
   const [form, setForm] = useState<ContactForm>({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});

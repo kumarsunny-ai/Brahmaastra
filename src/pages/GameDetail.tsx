@@ -1,7 +1,8 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Bug, Play, Image } from "lucide-react";
+import { ArrowRight, ArrowLeft, Bug, Play } from "lucide-react";
 import { getGameBySlug, statusConfig } from "@/data/games";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -11,6 +12,8 @@ const fadeUp = {
 const GameDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const game = slug ? getGameBySlug(slug) : undefined;
+
+  useDocumentTitle(game ? `${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
 
   if (!game) return <Navigate to="/games" replace />;
 
@@ -106,16 +109,13 @@ const GameDetail = () => {
           </motion.section>
         )}
 
-        {/* Screenshots Placeholder */}
+        {/* Screenshots — Coming Soon */}
         <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-12">
           <h2 className="font-display text-2xl font-bold text-foreground mb-6">Screenshots</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
-            {[1, 2, 3].map((n) => (
-              <div key={n} className="aspect-video bg-card border border-border/50 rounded-xl flex flex-col items-center justify-center text-muted-foreground">
-                <Image size={32} className="mb-2 opacity-40" />
-                <span className="text-xs">Screenshot {n}</span>
-              </div>
-            ))}
+          <div className="bg-card border border-border/50 rounded-xl p-10 text-center">
+            <p className="text-muted-foreground text-sm">
+              Screenshots and gameplay recordings are coming soon.
+            </p>
           </div>
         </motion.section>
       </div>

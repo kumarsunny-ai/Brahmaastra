@@ -17,19 +17,20 @@ const Footer = () => {
 
           <div>
             <h4 className="font-display text-sm font-semibold text-foreground mb-4">Pages</h4>
-            <div className="flex flex-col gap-2.5">
+            <nav className="flex flex-col gap-2.5" aria-label="Footer pages">
+              <Link to="/" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200">Home</Link>
               <Link to="/games" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200">Games</Link>
               <Link to="/about" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200">About</Link>
               <Link to="/contact" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200">Contact</Link>
-            </div>
+            </nav>
           </div>
 
           <div>
             <h4 className="font-display text-sm font-semibold text-foreground mb-4">Legal</h4>
-            <div className="flex flex-col gap-2.5">
+            <nav className="flex flex-col gap-2.5" aria-label="Footer legal">
               <Link to="/privacy" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200">Privacy Policy</Link>
               <Link to="/terms" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200">Terms of Use</Link>
-            </div>
+            </nav>
           </div>
         </div>
 
@@ -37,11 +38,9 @@ const Footer = () => {
           <p className="text-muted-foreground text-xs">
             © {new Date().getFullYear()} Brahmaastra. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200" aria-label="Twitter">Twitter</a>
-            <a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200" aria-label="Discord">Discord</a>
-            <a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200" aria-label="Instagram">Instagram</a>
-          </div>
+          <p className="text-muted-foreground text-xs">
+            Socials coming soon — stay tuned.
+          </p>
         </div>
       </div>
     </footer>

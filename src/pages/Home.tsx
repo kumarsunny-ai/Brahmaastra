@@ -5,6 +5,7 @@ import WaitlistSignup from "@/components/WaitlistSignup";
 import SectionHeading from "@/components/SectionHeading";
 import GameCard from "@/components/GameCard";
 import { games } from "@/data/games";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -22,6 +23,7 @@ const philosophy = [
 ];
 
 const Home = () => {
+  useDocumentTitle("Brahmaastra — Indie Games with Desi Soul & Global Fun");
   return (
     <div className="min-h-screen pt-16">
       {/* Hero */}

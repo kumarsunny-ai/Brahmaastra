@@ -4,12 +4,15 @@ import { motion } from "framer-motion";
 import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor } from "lucide-react";
 import GilliDandaGame from "@/components/GilliDandaGame";
 import { getGameBySlug } from "@/data/games";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const Play = () => {
   const { slug } = useParams<{ slug: string }>();
   const resolvedSlug = slug || "gilli-panda";
   const game = getGameBySlug(resolvedSlug);
   const [gameStarted, setGameStarted] = useState(false);
+
+  useDocumentTitle(game ? `Play ${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
 
   const isSupported = typeof window !== "undefined" && !!window.requestAnimationFrame && !!window.HTMLCanvasElement;
 

@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
 import GameCard from "@/components/GameCard";
 import { games, statusConfig } from "@/data/games";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const flagship = games.find((g) => g.featured)!;
 const otherGames = games.filter((g) => !g.featured);
 const allTags = ["All", ...Array.from(new Set(otherGames.flatMap((g) => g.tags)))];
 
 const Games = () => {
+  useDocumentTitle("Games — Brahmaastra");
   const [activeTag, setActiveTag] = useState("All");
   const filtered = activeTag === "All" ? otherGames : otherGames.filter((g) => g.tags.includes(activeTag));
   const flagshipStyle = statusConfig[flagship.status];
