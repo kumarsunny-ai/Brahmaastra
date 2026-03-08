@@ -542,28 +542,28 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: GilliDandaGameProps) => {
 
       // Game over screen
       if (s.phase === "gameover") {
-        ctx.fillStyle = "rgba(0,0,0,0.6)";
+        ctx.fillStyle = "rgba(0,0,0,0.65)";
         ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
 
         ctx.textAlign = "center";
-        ctx.font = "bold 44px 'Space Grotesk', sans-serif";
+        ctx.font = "bold 40px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.miss;
-        ctx.fillText("Game Over", CANVAS_W / 2, 170);
+        ctx.fillText("Game Over", CANVAS_W / 2, 160);
 
-        ctx.font = "bold 64px 'Space Grotesk', sans-serif";
+        ctx.font = "bold 72px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.score;
-        ctx.fillText(String(s.score), CANVAS_W / 2, 250);
+        ctx.fillText(String(s.score), CANVAS_W / 2, 245);
 
-        ctx.font = "18px 'Inter', sans-serif";
+        ctx.font = "16px 'Inter', sans-serif";
         ctx.fillStyle = c.muted;
-        ctx.fillText("points", CANVAS_W / 2, 275);
+        ctx.fillText("points", CANVAS_W / 2, 272);
 
         if (s.score >= s.bestScore && s.score > 0) {
           ctx.font = "bold 20px 'Space Grotesk', sans-serif";
           ctx.fillStyle = c.accent;
           ctx.fillText("🌟 New Record!", CANVAS_W / 2, 310);
         } else {
-          ctx.font = "16px 'Inter', sans-serif";
+          ctx.font = "14px 'Inter', sans-serif";
           ctx.fillStyle = c.muted;
           ctx.fillText(`Best: ${s.bestScore}`, CANVAS_W / 2, 310);
         }
@@ -572,8 +572,13 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: GilliDandaGameProps) => {
         ctx.globalAlpha = pulse2;
         ctx.font = "bold 22px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.accent;
-        ctx.fillText("Click or Tap to Retry", CANVAS_W / 2, 370);
+        ctx.fillText("▶  Play Again", CANVAS_W / 2, 370);
         ctx.globalAlpha = 1;
+
+        // Branding
+        ctx.font = "11px 'Space Grotesk', sans-serif";
+        ctx.fillStyle = "rgba(255,255,255,0.2)";
+        ctx.fillText("brahmaastra.com", CANVAS_W / 2, 420);
       }
 
       rafRef.current = requestAnimationFrame(loop);
