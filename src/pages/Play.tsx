@@ -96,6 +96,7 @@ const Play = () => {
     "chai-tapper": <ChaiTapperGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
     "dabba-dash": <DabbaDashGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
     "metro-surfers": <MetroSurfersGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "kancha-masters": <KanchaMastersGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
   };
 
   const gameComponent = gameComponents[resolvedSlug];

@@ -106,6 +106,26 @@ export const games: GameData[] = [
       "Collect tokens and power-ups: 🧲 Magnet, ✖️ 2x Score, 🚀 Jetpack!",
     ],
   },
+  {
+    slug: "kancha-masters",
+    title: "Kancha Masters",
+    emoji: "🔮",
+    description: "The classic Indian marble game — aim, shoot, and knock kanchas out of the circle!",
+    longDescription:
+      "Relive the nostalgia of gully cricket breaks and summer vacations with Kancha Masters! Draw a circle, place your marbles, and use your shooter to knock them out. Master aim, power, and strategy across 5 rounds with combos, power-ups, and physics-based marble collisions. A game rooted in Harappan-era tradition, now in your browser.",
+    status: "playable",
+    statusLabel: "Playable MVP",
+    tags: ["Browser Game", "Arcade", "Desi Sports", "Family Fun", "Strategy"],
+    ctaLabel: "Play Now",
+    featured: false,
+    howToPlay: [
+      "Move your mouse to aim the shooter marble at the circle.",
+      "Click once to lock aim, then click again when the power meter is right.",
+      "Knock marbles out of the chalk circle to score points.",
+      "Chain knockouts for combo multipliers! Collect power-ups for an edge.",
+      "Play 5 rounds — limited shots per round, so aim carefully!",
+    ],
+  },
 ];
 
 export const statusConfig: Record<GameStatus, { bg: string; text: string; dot: string }> = {
