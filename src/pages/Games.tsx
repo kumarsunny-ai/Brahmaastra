@@ -12,6 +12,7 @@ const otherGames = games.filter((g) => !g.featured);
 const allTags = ["All", ...Array.from(new Set(otherGames.flatMap((g) => g.tags)))];
 
 const Games = () => {
+  useDocumentTitle("Games — Brahmaastra");
   const [activeTag, setActiveTag] = useState("All");
   const filtered = activeTag === "All" ? otherGames : otherGames.filter((g) => g.tags.includes(activeTag));
   const flagshipStyle = statusConfig[flagship.status];

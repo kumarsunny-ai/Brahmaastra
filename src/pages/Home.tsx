@@ -23,6 +23,7 @@ const philosophy = [
 ];
 
 const Home = () => {
+  useDocumentTitle("Brahmaastra — Indie Games with Desi Soul & Global Fun");
   return (
     <div className="min-h-screen pt-16">
       {/* Hero */}

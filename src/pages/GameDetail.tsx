@@ -13,6 +13,8 @@ const GameDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const game = slug ? getGameBySlug(slug) : undefined;
 
+  useDocumentTitle(game ? `${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
+
   if (!game) return <Navigate to="/games" replace />;
 
   const style = statusConfig[game.status];

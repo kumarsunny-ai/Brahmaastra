@@ -15,6 +15,7 @@ type ContactForm = z.infer<typeof contactSchema>;
 type FormErrors = Partial<Record<keyof ContactForm, string>>;
 
 const Contact = () => {
+  useDocumentTitle("Contact — Brahmaastra");
   const { toast } = useToast();
   const [form, setForm] = useState<ContactForm>({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});

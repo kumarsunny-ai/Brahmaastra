@@ -12,6 +12,8 @@ const Play = () => {
   const game = getGameBySlug(resolvedSlug);
   const [gameStarted, setGameStarted] = useState(false);
 
+  useDocumentTitle(game ? `Play ${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
+
   const isSupported = typeof window !== "undefined" && !!window.requestAnimationFrame && !!window.HTMLCanvasElement;
 
   // Unsupported browser
