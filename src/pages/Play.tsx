@@ -167,16 +167,16 @@ const Play = () => {
           </h3>
           <div className="grid sm:grid-cols-3 gap-4">
             <div className="bg-card border border-border/50 rounded-xl p-5">
-              <span className="text-foreground font-medium text-sm">Tap / Click</span>
-              <p className="text-muted-foreground text-xs mt-1">Set power and angle to launch the gilli</p>
+              <span className="text-foreground font-medium text-sm">Click / Tap / Space</span>
+              <p className="text-muted-foreground text-xs mt-1">Swing the bat when the gilli is in range</p>
             </div>
             <div className="bg-card border border-border/50 rounded-xl p-5">
-              <span className="text-foreground font-medium text-sm">Timing</span>
-              <p className="text-muted-foreground text-xs mt-1">Watch the meters — time your taps for max distance</p>
+              <span className="text-foreground font-medium text-sm">Timing is Key</span>
+              <p className="text-muted-foreground text-xs mt-1">Hit the gilli at the perfect moment for max points</p>
             </div>
             <div className="bg-card border border-border/50 rounded-xl p-5">
-              <span className="text-foreground font-medium text-sm">Goal</span>
-              <p className="text-muted-foreground text-xs mt-1">Beat your high score and chase legendary distances</p>
+              <span className="text-foreground font-medium text-sm">Build Combos</span>
+              <p className="text-muted-foreground text-xs mt-1">Chain hits for combo multipliers — 3 misses and it's over</p>
             </div>
           </div>
         </motion.div>
