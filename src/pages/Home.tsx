@@ -1,64 +1,88 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Gamepad2, Zap, Globe, Heart } from "lucide-react";
+import { Gamepad2, Zap, Globe, Heart, ArrowRight } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import GameCard from "@/components/GameCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.12, duration: 0.6 } }),
 };
 
 const Home = () => {
   return (
     <div className="min-h-screen pt-16">
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-4">
-        {/* Decorative blobs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-accent/10 rounded-full blur-[100px]" />
+      <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden px-4">
+        {/* Ambient glow effects */}
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[150px] animate-pulse" />
+        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-accent/6 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/4 rounded-full blur-[200px]" />
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
 
         <motion.div
           initial="hidden"
           animate="visible"
-          className="relative z-10 text-center max-w-3xl mx-auto"
+          className="relative z-10 text-center max-w-4xl mx-auto"
         >
-          <motion.div custom={0} variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary border border-border text-sm text-muted-foreground mb-8">
-            <Gamepad2 size={14} />
+          <motion.div custom={0} variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/80 border border-border/50 text-sm text-muted-foreground mb-8 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             Indie Game Studio
           </motion.div>
 
-          <motion.h1 custom={1} variants={fadeUp} className="text-5xl md:text-7xl font-display font-bold text-foreground mb-6 leading-tight">
-            Brahmaastra{" "}
+          <motion.h1 custom={1} variants={fadeUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold text-foreground mb-6 leading-[1.1]">
+            <span className="logo-text">Brahmaastra</span>
+            <br />
             <span className="gradient-text">Indie Games</span>
           </motion.h1>
 
-          <motion.p custom={2} variants={fadeUp} className="text-lg md:text-xl text-muted-foreground mb-10 max-w-xl mx-auto">
+          <motion.p custom={2} variants={fadeUp} className="text-lg md:text-xl text-muted-foreground mb-12 max-w-xl mx-auto leading-relaxed">
             Handcrafted games with desi soul and global fun
           </motion.p>
 
           <motion.div custom={3} variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/play"
-              className="inline-flex items-center justify-center text-base font-medium px-8 py-3.5 rounded-xl gradient-bg text-primary-foreground glow-primary hover:opacity-90 transition-all"
+              className="group inline-flex items-center justify-center gap-2 text-base font-medium px-8 py-4 rounded-xl gradient-bg text-primary-foreground glow-primary hover:opacity-90 transition-all duration-300 hover-lift"
             >
-              🎮 Play Gilli Panda
+              <span>🎮</span>
+              Play Gilli Panda
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               to="/games"
-              className="inline-flex items-center justify-center text-base font-medium px-8 py-3.5 rounded-xl bg-secondary border border-border text-secondary-foreground hover:bg-secondary/80 transition-all"
+              className="btn-premium inline-flex items-center justify-center text-base font-medium px-8 py-4 rounded-xl bg-secondary border border-border/50 text-secondary-foreground hover:border-primary/30 transition-all duration-300"
             >
               Explore Games
             </Link>
           </motion.div>
         </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        >
+          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-1.5 h-1.5 rounded-full bg-muted-foreground"
+            />
+          </div>
+        </motion.div>
       </section>
 
       {/* Featured Game */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-4xl">
+      <section className="py-24 px-4 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
+        <div className="container mx-auto max-w-5xl relative">
           <SectionHeading title="Featured Game" subtitle="Our flagship title — now playable in your browser" />
-          <div className="max-w-md mx-auto">
+          <div className="max-w-xl mx-auto">
             <GameCard
               title="Gilli Panda"
               description="A mythic twist on India's timeless Gilli-Danda. Time your swings, launch the gilli sky-high, and chase legendary distances!"
@@ -73,10 +97,10 @@ const Home = () => {
       </section>
 
       {/* Why Play */}
-      <section className="py-20 px-4 bg-card/30">
+      <section className="py-24 px-4 bg-card/20">
         <div className="container mx-auto max-w-5xl">
           <SectionHeading title="Why Play Our Games?" subtitle="We build games that feel different" />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               { icon: Heart, title: "Made with Love", desc: "Every pixel crafted with passion by a small indie team." },
               { icon: Globe, title: "Desi Soul", desc: "Rooted in Indian culture, built for global audiences." },
@@ -87,16 +111,16 @@ const Home = () => {
                 key={item.title}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-50px" }}
                 custom={i}
                 variants={fadeUp}
-                className="bg-card border border-border rounded-xl p-6 text-center hover:border-primary/30 transition-colors"
+                className="card-glow bg-card border border-border/50 rounded-xl p-6 text-center hover:border-primary/20 transition-all duration-300"
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg gradient-bg text-primary-foreground mb-4">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl gradient-bg text-primary-foreground mb-4">
                   <item.icon size={22} />
                 </div>
-                <h3 className="font-display text-base font-bold text-foreground mb-1">{item.title}</h3>
-                <p className="text-muted-foreground text-sm">{item.desc}</p>
+                <h3 className="font-display text-base font-semibold text-foreground mb-1.5">{item.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -104,19 +128,24 @@ const Home = () => {
       </section>
 
       {/* Newsletter */}
-      <section className="py-20 px-4">
+      <section className="py-24 px-4">
         <div className="container mx-auto max-w-lg text-center">
           <SectionHeading title="Stay in the Loop" subtitle="Get updates on new games, features, and tournaments." />
-          <div className="flex gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex gap-3"
+          >
             <input
               type="email"
               placeholder="your@email.com"
-              className="flex-1 bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              className="flex-1 bg-secondary/80 border border-border/50 rounded-xl px-5 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
             />
-            <button className="px-6 py-3 rounded-lg gradient-bg text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
+            <button className="px-6 py-3.5 rounded-xl gradient-bg text-primary-foreground text-sm font-medium hover:opacity-90 transition-all duration-200 hover-lift glow-primary">
               Join
             </button>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
