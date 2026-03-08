@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Bug, Play, Image } from "lucide-react";
+import { ArrowRight, ArrowLeft, Bug, Play } from "lucide-react";
 import { getGameBySlug, statusConfig } from "@/data/games";
 
 const fadeUp = {
