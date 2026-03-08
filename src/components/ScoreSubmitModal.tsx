@@ -34,6 +34,7 @@ const ScoreSubmitModal = ({ open, score, isNewRecord, onSubmit, onSkip }: ScoreS
     const trimmed = name.trim() || "Anonymous";
     localStorage.setItem("gilliPanda_playerName", trimmed);
     setSubmitted(true);
+    trackEvent("leaderboard_submit", { score, playerName: trimmed });
     onSubmit(trimmed);
   };
 
