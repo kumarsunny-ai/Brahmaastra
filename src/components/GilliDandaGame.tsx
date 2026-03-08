@@ -250,7 +250,7 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
               s.flashColor = c.miss;
               s.hitMessage = "Miss! ❌";
               s.hitMessageTimer = 40;
-              trackEvent("miss", { livesLeft: s.lives - 1 });
+              trackEvent("miss", { livesLeft: s.lives });
               spawnParticles(s.gilli.x, s.gilli.y, c.miss, 8);
               s.gilli = null;
               s.spawnTimer = 40;
