@@ -184,6 +184,7 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
 
   /* ─── Start game ─── */
   const startGame = useCallback(() => {
+    trackEvent("game_start");
     const s = stateRef.current;
     s.phase = "playing";
     s.score = 0;
