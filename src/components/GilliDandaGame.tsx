@@ -491,6 +491,12 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: GilliDandaGameProps) => {
           ctx.fillStyle = c.muted;
           ctx.fillText(`Level ${Math.floor(s.difficulty)}`, CANVAS_W / 2, CANVAS_H - 15);
         }
+
+        // Subtle branding watermark
+        ctx.textAlign = "right";
+        ctx.font = "10px 'Space Grotesk', sans-serif";
+        ctx.fillStyle = "rgba(255,255,255,0.12)";
+        ctx.fillText("brahmaastra.com", CANVAS_W - 12, CANVAS_H - 10);
       }
 
       // Ready screen
