@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Trophy, Star } from "lucide-react";
+import { Trophy, Star, Share2, Copy, Check } from "lucide-react";
 
 interface ScoreSubmitModalProps {
   open: boolean;
@@ -10,12 +10,20 @@ interface ScoreSubmitModalProps {
   onSkip: () => void;
 }
 
+const SHARE_URL = "https://brahmaastra.com/play/gilli-panda";
+
 const ScoreSubmitModal = ({ open, score, isNewRecord, onSubmit, onSkip }: ScoreSubmitModalProps) => {
   const [name, setName] = useState(() => localStorage.getItem("gilliPanda_playerName") || "");
+  const [submitted, setSubmitted] = useState(false);
+  const [copied, setCopied] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const shareText = `I scored ${score.toLocaleString()} in Gilli Panda on Brahmaastra! 🏏🔥 Can you beat me?`;
 
   useEffect(() => {
     if (open) {
+      setSubmitted(false);
+      setCopied(false);
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [open]);
@@ -24,8 +32,45 @@ const ScoreSubmitModal = ({ open, score, isNewRecord, onSubmit, onSkip }: ScoreS
     e.preventDefault();
     const trimmed = name.trim() || "Anonymous";
     localStorage.setItem("gilliPanda_playerName", trimmed);
+    setSubmitted(true);
     onSubmit(trimmed);
   };
+
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(`${shareText}\n${SHARE_URL}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback for older browsers
+      const textarea = document.createElement("textarea");
+      textarea.value = `${shareText}\n${SHARE_URL}`;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }, [shareText]);
+
+  const handleShare = useCallback(async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Gilli Panda — Brahmaastra",
+          text: shareText,
+          url: SHARE_URL,
+        });
+      } catch {
+        // User cancelled share — do nothing
+      }
+    } else {
+      handleCopy();
+    }
+  }, [shareText, handleCopy]);
+
+  const supportsNativeShare = typeof navigator !== "undefined" && !!navigator.share;
 
   return (
     <AnimatePresence>
@@ -59,10 +104,12 @@ const ScoreSubmitModal = ({ open, score, isNewRecord, onSubmit, onSkip }: ScoreS
             )}
 
             <p className="text-5xl font-display font-bold text-game-score mb-1">{score.toLocaleString()}</p>
-            <p className="text-sm text-muted-foreground mb-6">You made the leaderboard!</p>
+            <p className="text-sm text-muted-foreground mb-6">
+              {submitted ? "Score saved!" : "You made the leaderboard!"}
+            </p>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                   ref={inputRef}
                   type="text"
@@ -71,26 +118,71 @@ const ScoreSubmitModal = ({ open, score, isNewRecord, onSubmit, onSkip }: ScoreS
                   placeholder="Enter your name"
                   maxLength={20}
                   className="w-full px-4 py-3 rounded-xl bg-secondary border border-border/50 text-foreground text-center font-medium placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  onKeyDown={(e) => {
-                    // Prevent game input while typing
-                    e.stopPropagation();
-                  }}
+                  onKeyDown={(e) => e.stopPropagation()}
                 />
-              </div>
-              <button
-                type="submit"
-                className="w-full px-6 py-3 rounded-xl gradient-bg text-primary-foreground font-medium glow-primary hover:opacity-90 transition-all"
+                <button
+                  type="submit"
+                  className="w-full px-6 py-3 rounded-xl gradient-bg text-primary-foreground font-medium glow-primary hover:opacity-90 transition-all"
+                >
+                  Submit Score
+                </button>
+                <button
+                  type="button"
+                  onClick={onSkip}
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Skip
+                </button>
+              </form>
+            ) : (
+              /* Share section after submit */
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="space-y-3"
               >
-                Submit Score
-              </button>
-              <button
-                type="button"
-                onClick={onSkip}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Skip
-              </button>
-            </form>
+                {/* Share text preview */}
+                <div className="bg-secondary/50 border border-border/30 rounded-xl px-4 py-3 text-left">
+                  <p className="text-sm text-foreground leading-relaxed">{shareText}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{SHARE_URL}</p>
+                </div>
+
+                {/* Share buttons */}
+                <div className="flex gap-2">
+                  {supportsNativeShare && (
+                    <button
+                      onClick={handleShare}
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl gradient-bg text-primary-foreground font-medium glow-primary hover:opacity-90 transition-all"
+                    >
+                      <Share2 size={16} /> Share
+                    </button>
+                  )}
+                  <button
+                    onClick={handleCopy}
+                    className={`flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium transition-all ${
+                      copied
+                        ? "bg-accent/20 border border-accent/30 text-accent"
+                        : "bg-secondary border border-border/50 text-foreground hover:bg-secondary/80"
+                    }`}
+                  >
+                    {copied ? (
+                      <><Check size={16} /> Copied!</>
+                    ) : (
+                      <><Copy size={16} /> Copy</>
+                    )}
+                  </button>
+                </div>
+
+                {/* Play again */}
+                <button
+                  onClick={onSkip}
+                  className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors pt-1"
+                >
+                  Continue →
+                </button>
+              </motion.div>
+            )}
           </motion.div>
         </motion.div>
       )}
