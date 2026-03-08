@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <Link to="/" className="logo-text text-lg flex items-center gap-2 mb-3">
               <span className="text-xl">⚡</span>
-              BRAHMAASTRA
+              BRAHMASTRA
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
               An indie game studio crafting handcrafted games with desi soul and global fun.
