@@ -178,6 +178,7 @@ const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
         s.hitMessageTimer = 45;
 
         setUiScore(s.score);
+        trackEvent("successful_hit", { points: totalPoints, combo: s.combo, precision: Math.round(precision * 100) });
       }
     }
   }, [spawnParticles]);
