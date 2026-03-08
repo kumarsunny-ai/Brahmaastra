@@ -61,6 +61,15 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        game: {
+          sky: "hsl(var(--game-sky))",
+          ground: "hsl(var(--game-ground))",
+          bat: "hsl(var(--game-bat))",
+          gilli: "hsl(var(--game-gilli))",
+          strike: "hsl(var(--game-strike))",
+          miss: "hsl(var(--game-miss))",
+          score: "hsl(var(--game-score))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

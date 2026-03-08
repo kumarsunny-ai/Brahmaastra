@@ -40,6 +40,15 @@
     --glow-accent: 0 0 50px hsl(165 82% 50% / 0.25);
     --glow-soft: 0 0 80px hsl(270 95% 60% / 0.15);
 
+    /* Game tokens */
+    --game-sky: 210 60% 12%;
+    --game-ground: 120 30% 18%;
+    --game-bat: 30 60% 45%;
+    --game-gilli: 40 70% 55%;
+    --game-strike: 165 82% 50%;
+    --game-miss: 0 65% 50%;
+    --game-score: 45 100% 60%;
+
     --sidebar-background: 240 10% 6%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-primary: 270 95% 60%;
