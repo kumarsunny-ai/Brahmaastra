@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import BrahmaastraLogo from "./BrahmaastraLogo";
 
 const Footer = () => {
   return (
@@ -6,10 +7,9 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-14">
         <div className="grid md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
-            <Link to="/" className="logo-text text-lg flex items-center gap-2 mb-3">
-              <span className="text-xl">⚡</span>
-              BRAHMAASTRA
-            </Link>
+            <div className="mb-3">
+              <BrahmaastraLogo size="sm" />
+            </div>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
               An indie game studio crafting handcrafted games with desi soul and global fun.
             </p>

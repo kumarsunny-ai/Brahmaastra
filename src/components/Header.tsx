@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import BrahmaastraLogo from "./BrahmaastraLogo";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -17,10 +18,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/70 backdrop-blur-xl border-b border-border/50">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <Link to="/" className="logo-text text-xl tracking-tight flex items-center gap-2">
-          <span className="text-2xl">⚡</span>
-          BRAHMAASTRA
-        </Link>
+        <BrahmaastraLogo />
 
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
