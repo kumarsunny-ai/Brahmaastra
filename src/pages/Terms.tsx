@@ -16,7 +16,7 @@ const Terms = () => (
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Changes</h3>
         <p>We may update these terms at any time. Continued use constitutes acceptance of the updated terms.</p>
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Contact</h3>
-        <p>Questions? Reach us at hello@brahmastra.com.</p>
+        <p>Questions? Reach us at hello@brahmaastra.com.</p>
       </div>
     </div>
   </div>

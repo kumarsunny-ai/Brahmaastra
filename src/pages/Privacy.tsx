@@ -14,7 +14,7 @@ const Privacy = () => (
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Cookies</h3>
         <p>We may use minimal cookies and local storage for game progress. No third-party tracking cookies are used.</p>
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Contact</h3>
-        <p>For privacy-related inquiries, email us at hello@brahmastra.com.</p>
+        <p>For privacy-related inquiries, email us at hello@brahmaastra.com.</p>
       </div>
     </div>
   </div>

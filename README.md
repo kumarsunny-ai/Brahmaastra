@@ -1,6 +1,6 @@
-# Brahmastra — Indie Game Studio
+# Brahmaastra — Indie Game Studio
 
-**Brahmastra** is an indie game studio building playful, culturally inspired browser games with desi soul and global fun.
+**Brahmaastra** is an indie game studio building playful, culturally inspired browser games with desi soul and global fun.
 
 ## 🎮 Featured Game: Gilli Panda
 
@@ -8,7 +8,7 @@ A playful browser game inspired by the traditional Indian sport Gilli-Danda. Set
 
 ## 🌐 Website
 
-Live at [brahmastra.com](https://brahmastra.com)
+Live at [brahmaastra.com](https://brahmaastra.com)
 
 ### Pages
 
@@ -31,12 +31,12 @@ Live at [brahmastra.com](https://brahmastra.com)
 ## 🚀 Getting Started
 
 ```sh
-git clone https://github.com/your-username/brahmastra.git
-cd brahmastra
+git clone https://github.com/your-username/brahmaastra.git
+cd brahmaastra
 npm install
 npm run dev
 ```
 
 ## 📄 License
 
-All game assets, code, designs, and branding are owned by Brahmastra. All rights reserved.
+All game assets, code, designs, and branding are owned by Brahmaastra. All rights reserved.
