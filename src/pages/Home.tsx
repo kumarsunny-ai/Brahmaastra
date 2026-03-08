@@ -17,7 +17,7 @@ const roadmap = [
   { icon: Sparkles, label: "Now", title: "Gilli Panda MVP", desc: "Playable in browser — power, angle, score!" },
   { icon: Target, label: "Next", title: "Leaderboards & Multiplayer", desc: "Compete with friends and climb the ranks." },
   { icon: Palette, label: "Soon", title: "New Game Titles", desc: "AutoRickshaw Rampage, Chai Tapper, and more." },
-  { icon: Rocket, label: "Vision", title: "Brahmastra Platform", desc: "A home for culturally inspired indie games." },
+  { icon: Rocket, label: "Vision", title: "Brahmaastra Platform", desc: "A home for culturally inspired indie games." },
 ];
 
 const Home = () => {
