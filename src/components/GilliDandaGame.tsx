@@ -496,34 +496,41 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: GilliDandaGameProps) => {
       // Ready screen
       if (s.phase === "ready") {
         // Dim overlay
-        ctx.fillStyle = "rgba(0,0,0,0.5)";
+        ctx.fillStyle = "rgba(0,0,0,0.55)";
         ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
 
         ctx.textAlign = "center";
+
+        // Brahmaastra branding
+        ctx.font = "12px 'Space Grotesk', sans-serif";
+        ctx.fillStyle = c.muted;
+        ctx.fillText("brahmaastra.com", CANVAS_W / 2, 130);
+
         ctx.font = "bold 48px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.fg;
-        ctx.fillText("🏏 Gilli Panda", CANVAS_W / 2, 180);
+        ctx.fillText("🏏 Gilli Panda", CANVAS_W / 2, 185);
 
-        ctx.font = "18px 'Inter', sans-serif";
+        ctx.font = "16px 'Inter', sans-serif";
         ctx.fillStyle = c.muted;
         ctx.fillText("Time your swings to hit the gilli!", CANVAS_W / 2, 220);
+
+        // Controls hint
+        ctx.font = "13px 'Inter', sans-serif";
+        ctx.fillStyle = "rgba(255,255,255,0.3)";
+        ctx.fillText("Click · Tap · Spacebar", CANVAS_W / 2, 260);
 
         // Animated prompt
         const pulse = 0.7 + Math.sin(Date.now() / 400) * 0.3;
         ctx.globalAlpha = pulse;
-        ctx.font = "bold 22px 'Space Grotesk', sans-serif";
+        ctx.font = "bold 24px 'Space Grotesk', sans-serif";
         ctx.fillStyle = c.accent;
-        ctx.fillText("Click or Tap to Start", CANVAS_W / 2, 300);
+        ctx.fillText("▶  Start Game", CANVAS_W / 2, 320);
         ctx.globalAlpha = 1;
-
-        ctx.font = "14px 'Inter', sans-serif";
-        ctx.fillStyle = c.muted;
-        ctx.fillText("Click / Tap / Spacebar to swing", CANVAS_W / 2, 340);
 
         if (s.bestScore > 0) {
           ctx.font = "16px 'Space Grotesk', sans-serif";
           ctx.fillStyle = c.score;
-          ctx.fillText(`🏆 Best: ${s.bestScore}`, CANVAS_W / 2, 380);
+          ctx.fillText(`🏆 Best: ${s.bestScore}`, CANVAS_W / 2, 370);
         }
       }
 
