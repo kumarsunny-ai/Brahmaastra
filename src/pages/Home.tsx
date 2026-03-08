@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Gamepad2, Zap, Globe, Heart, ArrowRight, Rocket, Palette, Target, Sparkles } from "lucide-react";
+import { Gamepad2, Zap, Globe, Heart, ArrowRight, Rocket, Palette, Target, Sparkles, Code2, Users, Flame } from "lucide-react";
 import WaitlistSignup from "@/components/WaitlistSignup";
 import SectionHeading from "@/components/SectionHeading";
 import GameCard from "@/components/GameCard";
@@ -20,6 +20,12 @@ const roadmap = [
   { icon: Rocket, label: "Vision", title: "Brahmaastra Platform", desc: "A home for culturally inspired indie games." },
 ];
 
+const philosophy = [
+  { icon: Flame, title: "Culture Meets Play", desc: "We draw from rich Indian traditions and reimagine them as games the whole world can enjoy." },
+  { icon: Code2, title: "Browser-First", desc: "No app stores, no installs. Every game runs instantly in your browser — on any device." },
+  { icon: Users, title: "Community Driven", desc: "Players shape our roadmap. We build what excites you, together." },
+];
+
 const Home = () => {
   return (
     <div className="min-h-screen pt-16">
@@ -33,17 +39,21 @@ const Home = () => {
         <motion.div initial="hidden" animate="visible" className="relative z-10 text-center max-w-4xl mx-auto">
           <motion.div custom={0} variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/80 border border-border/50 text-sm text-muted-foreground mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            Indie Game Studio
+            Indie Game Studio — India
           </motion.div>
 
           <motion.h1 custom={1} variants={fadeUp} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold text-foreground mb-6 leading-[1.1]">
             <span className="logo-text">Brahmaastra</span>
             <br />
-            <span className="gradient-text">Indie Games</span>
+            <span className="text-2xl sm:text-3xl md:text-4xl font-medium text-muted-foreground mt-2 block">
+              Game Studio
+            </span>
           </motion.h1>
 
           <motion.p custom={2} variants={fadeUp} className="text-lg md:text-xl text-muted-foreground mb-12 max-w-xl mx-auto leading-relaxed">
-            Handcrafted games with desi soul and global fun
+            Handcrafted browser games with desi soul and global fun.
+            <br className="hidden sm:block" />
+            <span className="text-foreground/70 font-medium">No downloads. Just play.</span>
           </motion.p>
 
           <motion.div custom={3} variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -51,12 +61,12 @@ const Home = () => {
               to="/play/gilli-panda"
               className="group inline-flex items-center justify-center gap-2 text-base font-medium px-8 py-4 rounded-xl gradient-bg text-primary-foreground glow-primary hover:opacity-90 transition-all duration-300 hover-lift"
             >
-              <span>🎮</span> Play Gilli Panda
+              <span>🏏</span> Play Gilli Panda
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               to="/games"
-              className="btn-premium inline-flex items-center justify-center text-base font-medium px-8 py-4 rounded-xl bg-secondary border border-border/50 text-secondary-foreground hover:border-primary/30 transition-all duration-300"
+              className="inline-flex items-center justify-center text-base font-medium px-8 py-4 rounded-xl bg-secondary border border-border/50 text-secondary-foreground hover:border-primary/30 transition-all duration-300"
             >
               Explore Games
             </Link>
@@ -70,21 +80,47 @@ const Home = () => {
         </motion.div>
       </section>
 
-      {/* Featured Game */}
+      {/* Featured Game — Gilli Panda */}
       <section className="py-24 px-4 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
         <div className="container mx-auto max-w-5xl relative">
-          <SectionHeading title="Featured Game" subtitle="Our flagship title — now playable in your browser" />
+          <SectionHeading title="Our Flagship Game" subtitle="Gilli Panda — India's Gilli-Danda, reimagined for the browser" />
           <div className="max-w-xl mx-auto">
             <GameCard {...featuredGame} />
           </div>
         </div>
       </section>
 
-      {/* Explore Games */}
+      {/* Studio Philosophy */}
+      <section className="py-24 px-4 bg-card/30">
+        <div className="container mx-auto max-w-5xl">
+          <SectionHeading title="The Brahmaastra Way" subtitle="Why we build games differently" />
+          <div className="grid md:grid-cols-3 gap-6">
+            {philosophy.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                custom={i}
+                variants={fadeUp}
+                className="bg-card border border-border/50 rounded-xl p-8 text-center hover:border-primary/20 transition-all duration-300"
+              >
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl gradient-bg text-primary-foreground mb-5">
+                  <item.icon size={26} />
+                </div>
+                <h3 className="font-display text-lg font-bold text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* More Games */}
       <section className="py-24 px-4">
         <div className="container mx-auto max-w-6xl">
-          <SectionHeading title="Explore Games" subtitle="More titles in the works — stay tuned" />
+          <SectionHeading title="More Games Brewing" subtitle="Upcoming titles from the studio" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {games.filter((g) => !g.featured).slice(0, 3).map((game) => (
               <GameCard key={game.slug} {...game} />
@@ -101,7 +137,7 @@ const Home = () => {
       {/* Why Play */}
       <section className="py-24 px-4 bg-card/20">
         <div className="container mx-auto max-w-5xl">
-          <SectionHeading title="Why Play Our Games?" subtitle="We build games that feel different" />
+          <SectionHeading title="Why Play Our Games?" subtitle="Simple, fun, and built different" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               { icon: Heart, title: "Made with Love", desc: "Every pixel crafted with passion by a small indie team." },
@@ -161,7 +197,7 @@ const Home = () => {
       {/* Waitlist */}
       <section className="py-24 px-4">
         <div className="container mx-auto max-w-lg text-center">
-          <SectionHeading title="Get Early Access" subtitle="Be first to play new games, unlock beta features, and get Gilli Panda updates." />
+          <SectionHeading title="Join the Studio" subtitle="Be first to play new games, unlock beta features, and get updates from Brahmaastra." />
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <WaitlistSignup />
           </motion.div>
