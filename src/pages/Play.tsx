@@ -139,7 +139,7 @@ const Play = () => {
           >
             {isGilliPanda && isPlayable ? (
               gameStarted ? (
-                <GilliDandaGame onGameOver={handleGameOver} />
+                <GilliDandaGame onGameOver={handleGameOver} inputBlocked={showSubmit} />
               ) : (
                 /* Start Screen */
                 <div className="flex flex-col items-center justify-center h-full min-h-[520px] gap-6 px-4">

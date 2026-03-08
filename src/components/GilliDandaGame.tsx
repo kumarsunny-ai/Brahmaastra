@@ -572,13 +572,14 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: GilliDandaGameProps) => {
 
   /* ─── Input handlers ─── */
   const handleInput = useCallback(() => {
+    if (inputBlocked) return;
     const s = stateRef.current;
     if (s.phase === "ready" || s.phase === "gameover") {
       startGame();
     } else if (s.phase === "playing") {
       handleSwing();
     }
-  }, [startGame, handleSwing]);
+  }, [startGame, handleSwing, inputBlocked]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
