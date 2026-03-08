@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import SectionHeading from "@/components/SectionHeading";
 import GameCard from "@/components/GameCard";
 import { games, statusConfig } from "@/data/games";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const flagship = games.find((g) => g.featured)!;
 const otherGames = games.filter((g) => !g.featured);
