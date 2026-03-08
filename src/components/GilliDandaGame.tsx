@@ -46,6 +46,7 @@ function getCSSColor(varName: string, fallback: string): string {
 
 interface GilliDandaGameProps {
   onGameOver?: (score: number) => void;
+  inputBlocked?: boolean;
 }
 
 /* ─── Main Component ─── */
