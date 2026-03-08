@@ -6,7 +6,7 @@ const Terms = () => (
       <SectionHeading title="Terms of Use" gradient={false} />
       <div className="bg-card border border-border rounded-xl p-8 text-muted-foreground text-sm leading-relaxed space-y-4">
         <p><strong className="text-foreground">Last updated:</strong> March 2026</p>
-        <p>By accessing and using the Brahmastra website and games, you agree to these terms.</p>
+        <p>By accessing and using the Brahmaastra website and games, you agree to these terms.</p>
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Use of Service</h3>
         <p>Our games are provided free for personal, non-commercial use. You may not reverse-engineer, redistribute, or commercially exploit our content without permission.</p>
         <h3 className="font-display text-foreground font-semibold text-base pt-2">Intellectual Property</h3>
