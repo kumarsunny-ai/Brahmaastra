@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://brahmastra.com/sitemap.xml
+Sitemap: https://brahmaastra.com/sitemap.xml
