@@ -128,24 +128,19 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Newsletter */}
+      {/* Waitlist */}
       <section className="py-24 px-4">
         <div className="container mx-auto max-w-lg text-center">
-          <SectionHeading title="Stay in the Loop" subtitle="Get updates on new games, features, and tournaments." />
+          <SectionHeading
+            title="Get Early Access"
+            subtitle="Be first to play new games, unlock beta features, and get Gilli Panda updates."
+          />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex gap-3"
           >
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className="flex-1 bg-secondary/80 border border-border/50 rounded-xl px-5 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
-            />
-            <button className="px-6 py-3.5 rounded-xl gradient-bg text-primary-foreground text-sm font-medium hover:opacity-90 transition-all duration-200 hover-lift glow-primary">
-              Join
-            </button>
+            <WaitlistSignup />
           </motion.div>
         </div>
       </section>
