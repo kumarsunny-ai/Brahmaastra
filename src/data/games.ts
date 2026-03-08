@@ -18,20 +18,20 @@ export const games: GameData[] = [
   {
     slug: "gilli-panda",
     title: "Gilli Panda",
-    emoji: "🏏",
-    description: "A timing-based arcade game inspired by India's classic Gilli-Danda street sport.",
+    emoji: "🐼",
+    description: "A cute panda plays Gilli-Danda! Flip the gilli up, then smash it as far as you can.",
     longDescription:
-      "Gilli Panda reimagines India's timeless Gilli-Danda as a fast, fun browser arcade game. Time your swings to hit the gilli as it flies toward you — nail the timing for bonus points, chain hits for combos, and climb the leaderboard. Three misses and it's game over!",
+      "Gilli Panda brings India's beloved Gilli-Danda to life with a cute panda character. In each round, tap to set the perfect angle and flip the gilli into the air, then tap again with the right power to send it flying across the field. Play 5 rounds and aim for the highest total distance!",
     status: "playable",
     statusLabel: "Playable MVP",
     tags: ["Browser Game", "Arcade", "Desi Sports", "Family Fun"],
     ctaLabel: "Play Now",
     featured: true,
     howToPlay: [
-      "A gilli (small stick) flies toward you from the right — watch its speed and position.",
-      "Click, tap, or press Spacebar to swing your bat when the gilli enters the strike zone.",
-      "Perfect timing earns more points. Chain consecutive hits for combo multipliers.",
-      "You have 3 lives — miss 3 gillis and the game is over. Beat your high score!",
+      "Tap when the angle meter is in the green zone to flip the gilli upward.",
+      "Tap again when the power meter is in the green zone to smash the gilli forward.",
+      "Better timing on both meters = more distance and higher score.",
+      "You have 5 rounds — aim for the highest total score!",
     ],
   },
   {
