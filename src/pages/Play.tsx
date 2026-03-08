@@ -3,6 +3,10 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor } from "lucide-react";
 import GilliDandaGame from "@/components/GilliDandaGame";
+import AutoRickshawGame from "@/components/AutoRickshawGame";
+import ChaiTapperGame from "@/components/ChaiTapperGame";
+import DabbaDashGame from "@/components/DabbaDashGame";
+import MetroSurfersGame from "@/components/MetroSurfersGame";
 import Leaderboard from "@/components/Leaderboard";
 import ScoreSubmitModal from "@/components/ScoreSubmitModal";
 import { getGameBySlug } from "@/data/games";
@@ -83,8 +87,17 @@ const Play = () => {
     );
   }
 
-  const isGilliPanda = resolvedSlug === "gilli-panda";
   const isPlayable = game.status === "playable";
+
+  const gameComponents: Record<string, React.ReactNode> = {
+    "gilli-panda": <GilliDandaGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "autorickshaw-rampage": <AutoRickshawGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "chai-tapper": <ChaiTapperGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "dabba-dash": <DabbaDashGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "metro-surfers": <MetroSurfersGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+  };
+
+  const gameComponent = gameComponents[resolvedSlug];
 
   return (
     <div className="min-h-screen pt-20 pb-16">
@@ -137,9 +150,9 @@ const Play = () => {
             className="relative rounded-2xl border border-border/50 bg-card overflow-hidden"
             style={{ minHeight: "520px" }}
           >
-            {isGilliPanda && isPlayable ? (
+            {isPlayable && gameComponent ? (
               gameStarted ? (
-                <GilliDandaGame onGameOver={handleGameOver} inputBlocked={showSubmit} />
+                gameComponent
               ) : (
                 /* Start Screen */
                 <div className="flex flex-col items-center justify-center h-full min-h-[520px] gap-6 px-4">
