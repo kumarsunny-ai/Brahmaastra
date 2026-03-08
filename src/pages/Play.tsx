@@ -87,8 +87,17 @@ const Play = () => {
     );
   }
 
-  const isGilliPanda = resolvedSlug === "gilli-panda";
   const isPlayable = game.status === "playable";
+
+  const gameComponents: Record<string, React.ReactNode> = {
+    "gilli-panda": <GilliDandaGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "autorickshaw-rampage": <AutoRickshawGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "chai-tapper": <ChaiTapperGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "dabba-dash": <DabbaDashGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "metro-surfers": <MetroSurfersGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+  };
+
+  const gameComponent = gameComponents[resolvedSlug];
 
   return (
     <div className="min-h-screen pt-20 pb-16">
