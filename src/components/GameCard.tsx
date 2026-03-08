@@ -1,25 +1,13 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { type GameData, statusConfig } from "@/data/games";
 
-interface GameCardProps {
-  title: string;
-  description: string;
-  status: "live" | "coming-soon" | "beta";
-  ctaLabel: string;
-  ctaLink: string;
-  emoji: string;
-  featured?: boolean;
-}
+type GameCardProps = GameData;
 
-const statusConfig = {
-  live: { bg: "bg-accent/15", text: "text-accent", dot: "bg-accent", label: "Live" },
-  beta: { bg: "bg-primary/15", text: "text-primary", dot: "bg-primary", label: "Beta" },
-  "coming-soon": { bg: "bg-muted", text: "text-muted-foreground", dot: "bg-muted-foreground", label: "Coming Soon" },
-};
-
-const GameCard = ({ title, description, status, ctaLabel, ctaLink, emoji, featured }: GameCardProps) => {
-  const statusStyle = statusConfig[status];
+const GameCard = ({ slug, title, description, status, statusLabel, ctaLabel, emoji, featured, tags }: GameCardProps) => {
+  const style = statusConfig[status];
+  const isPlayable = status === "playable";
 
   return (
     <motion.div
@@ -28,7 +16,7 @@ const GameCard = ({ title, description, status, ctaLabel, ctaLink, emoji, featur
       className={`relative rounded-2xl p-1 ${featured ? "gradient-border" : ""}`}
     >
       <div
-        className={`relative rounded-2xl p-7 transition-all duration-300 ${
+        className={`relative rounded-2xl p-7 transition-all duration-300 h-full flex flex-col ${
           featured
             ? "featured-card border-0 glow-primary"
             : "bg-card border border-border/50 card-glow hover:border-primary/20"
@@ -46,34 +34,59 @@ const GameCard = ({ title, description, status, ctaLabel, ctaLink, emoji, featur
         )}
 
         <motion.div
-          className="text-6xl mb-5"
+          className="text-5xl mb-4"
           animate={featured ? { y: [0, -4, 0] } : {}}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           {emoji}
         </motion.div>
 
-        <div className="flex items-center gap-3 mb-3">
-          <h3 className="font-display text-xl font-bold text-foreground">{title}</h3>
-          <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full ${statusStyle.bg} ${statusStyle.text}`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${statusStyle.dot} ${status === "live" ? "animate-pulse" : ""}`} />
-            {statusStyle.label}
+        <div className="flex items-center gap-3 mb-2">
+          <h3 className="font-display text-lg font-bold text-foreground">{title}</h3>
+          <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full ${style.bg} ${style.text}`}>
+            <span className={`w-1.5 h-1.5 rounded-full ${style.dot} ${isPlayable ? "animate-pulse" : ""}`} />
+            {statusLabel}
           </span>
         </div>
 
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6">{description}</p>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">{description}</p>
 
-        <Link
-          to={ctaLink}
-          className={`group inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-xl transition-all duration-200 ${
-            featured
-              ? "gradient-bg text-primary-foreground hover:opacity-90 glow-primary"
-              : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-          }`}
-        >
-          {ctaLabel}
-          {featured && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
-        </Link>
+        {tags && (
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="text-[11px] px-2 py-0.5 rounded-full border border-border/50 text-muted-foreground bg-secondary/40">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="flex gap-2 mt-auto">
+          {isPlayable ? (
+            <>
+              <Link
+                to={`/play/${slug}`}
+                className="group inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl gradient-bg text-primary-foreground hover:opacity-90 transition-all"
+              >
+                Play Now
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to={`/games/${slug}`}
+                className="inline-flex items-center text-sm font-medium px-4 py-2 rounded-xl bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all"
+              >
+                Details
+              </Link>
+            </>
+          ) : (
+            <Link
+              to={`/games/${slug}`}
+              className="inline-flex items-center text-sm font-medium px-4 py-2 rounded-xl bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all"
+            >
+              {ctaLabel}
+            </Link>
+          )}
+        </div>
       </div>
     </motion.div>
   );
