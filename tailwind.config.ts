@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        display: ['Caveat', 'cursive'],
+        body: ['Patrick Hand', 'cursive'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -46,6 +50,14 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        game: {
+          ground: "hsl(var(--game-ground))",
+          sky: "hsl(var(--game-sky))",
+          power: "hsl(var(--game-power))",
+          angle: "hsl(var(--game-angle))",
+          gilli: "hsl(var(--game-gilli))",
+          score: "hsl(var(--game-score))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
