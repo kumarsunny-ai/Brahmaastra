@@ -7,6 +7,7 @@ import AutoRickshawGame from "@/components/AutoRickshawGame";
 import ChaiTapperGame from "@/components/ChaiTapperGame";
 import DabbaDashGame from "@/components/DabbaDashGame";
 import MetroSurfersGame from "@/components/MetroSurfersGame";
+import KanchaMastersGame from "@/components/KanchaMastersGame";
 import Leaderboard from "@/components/Leaderboard";
 import ScoreSubmitModal from "@/components/ScoreSubmitModal";
 import { getGameBySlug } from "@/data/games";
