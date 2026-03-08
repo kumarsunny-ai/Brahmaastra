@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,88 +6,56 @@
 
 @layer base {
   :root {
-    --background: 35 30% 92%;
-    --foreground: 25 40% 15%;
+    --background: 230 15% 8%;
+    --foreground: 40 20% 92%;
 
-    --card: 38 35% 88%;
-    --card-foreground: 25 40% 15%;
+    --card: 230 15% 12%;
+    --card-foreground: 40 20% 92%;
 
-    --popover: 38 35% 88%;
-    --popover-foreground: 25 40% 15%;
+    --popover: 230 15% 12%;
+    --popover-foreground: 40 20% 92%;
 
-    --primary: 25 70% 45%;
-    --primary-foreground: 40 30% 95%;
+    --primary: 38 90% 55%;
+    --primary-foreground: 230 15% 8%;
 
-    --secondary: 45 50% 75%;
-    --secondary-foreground: 25 40% 15%;
+    --secondary: 230 15% 18%;
+    --secondary-foreground: 40 20% 92%;
 
-    --muted: 35 20% 82%;
-    --muted-foreground: 25 15% 45%;
+    --muted: 230 10% 16%;
+    --muted-foreground: 230 10% 55%;
 
-    --accent: 140 35% 40%;
-    --accent-foreground: 40 30% 95%;
+    --accent: 15 80% 55%;
+    --accent-foreground: 40 20% 95%;
 
     --destructive: 0 65% 50%;
-    --destructive-foreground: 40 30% 95%;
+    --destructive-foreground: 40 20% 95%;
 
-    --border: 25 25% 70%;
-    --input: 25 25% 70%;
-    --ring: 25 70% 45%;
+    --border: 230 12% 20%;
+    --input: 230 12% 20%;
+    --ring: 38 90% 55%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    --sidebar-background: 35 30% 90%;
-    --sidebar-foreground: 25 40% 15%;
-    --sidebar-primary: 25 70% 45%;
-    --sidebar-primary-foreground: 40 30% 95%;
-    --sidebar-accent: 140 35% 40%;
-    --sidebar-accent-foreground: 40 30% 95%;
-    --sidebar-border: 25 25% 70%;
-    --sidebar-ring: 25 70% 45%;
+    /* Cinematic tokens */
+    --gold: 38 90% 55%;
+    --gold-light: 42 85% 68%;
+    --gold-dark: 35 80% 35%;
+    --ember: 15 80% 55%;
+    --deep: 230 20% 5%;
+    --glow-gold: 0 0 30px hsl(38 90% 55% / 0.4);
+    --glow-ember: 0 0 30px hsl(15 80% 55% / 0.3);
 
-    /* Game-specific tokens */
-    --game-ground: 25 35% 55%;
-    --game-sky: 195 40% 75%;
-    --game-power: 0 70% 55%;
-    --game-angle: 210 60% 50%;
-    --game-gilli: 40 60% 50%;
-    --game-score: 25 70% 45%;
+    --font-display: 'Cinzel', serif;
+    --font-body: 'Rajdhani', sans-serif;
 
-    --font-display: 'Caveat', cursive;
-    --font-body: 'Patrick Hand', cursive;
-
-    --shadow-sketch: 3px 3px 0px hsl(25 25% 70%);
-    --shadow-sketch-lg: 5px 5px 0px hsl(25 25% 70%);
-  }
-
-  .dark {
-    --background: 25 30% 10%;
-    --foreground: 35 30% 90%;
-    --card: 25 30% 14%;
-    --card-foreground: 35 30% 90%;
-    --popover: 25 30% 14%;
-    --popover-foreground: 35 30% 90%;
-    --primary: 30 70% 50%;
-    --primary-foreground: 25 30% 10%;
-    --secondary: 40 30% 25%;
-    --secondary-foreground: 35 30% 90%;
-    --muted: 25 20% 20%;
-    --muted-foreground: 35 15% 60%;
-    --accent: 140 35% 35%;
-    --accent-foreground: 35 30% 90%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 35 30% 90%;
-    --border: 25 20% 25%;
-    --input: 25 20% 25%;
-    --ring: 30 70% 50%;
-    --sidebar-background: 25 30% 12%;
-    --sidebar-foreground: 35 30% 90%;
-    --sidebar-primary: 30 70% 50%;
-    --sidebar-primary-foreground: 25 30% 10%;
-    --sidebar-accent: 140 35% 35%;
-    --sidebar-accent-foreground: 35 30% 90%;
-    --sidebar-border: 25 20% 25%;
-    --sidebar-ring: 30 70% 50%;
+    --sidebar-background: 230 15% 10%;
+    --sidebar-foreground: 40 20% 92%;
+    --sidebar-primary: 38 90% 55%;
+    --sidebar-primary-foreground: 230 15% 8%;
+    --sidebar-accent: 15 80% 55%;
+    --sidebar-accent-foreground: 40 20% 95%;
+    --sidebar-border: 230 12% 20%;
+    --sidebar-ring: 38 90% 55%;
   }
 }
 
@@ -106,28 +74,56 @@
   }
 }
 
+@layer utilities {
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+  .text-gold-light {
+    color: hsl(var(--gold-light));
+  }
+  .text-ember {
+    color: hsl(var(--ember));
+  }
+  .bg-deep {
+    background-color: hsl(var(--deep));
+  }
+  .glow-gold {
+    box-shadow: var(--glow-gold);
+  }
+  .glow-ember {
+    box-shadow: var(--glow-ember);
+  }
+  .border-gold {
+    border-color: hsl(var(--gold));
+  }
+  .border-gold\/30 {
+    border-color: hsl(var(--gold) / 0.3);
+  }
+  .bg-gold {
+    background-color: hsl(var(--gold));
+  }
+  .bg-gold\/10 {
+    background-color: hsl(var(--gold) / 0.1);
+  }
+  .bg-ember {
+    background-color: hsl(var(--ember));
+  }
+}
+
 @layer components {
-  .sketch-border {
-    border: 2.5px solid hsl(var(--foreground));
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  .cinematic-gradient {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--deep)) 0%,
+      hsl(230 15% 8%) 40%,
+      hsl(230 15% 12%) 100%
+    );
   }
 
-  .sketch-btn {
-    border: 2.5px solid hsl(var(--foreground));
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-    box-shadow: var(--shadow-sketch);
-    transition: all 0.15s ease;
-    font-family: var(--font-display);
-    font-weight: 600;
-  }
-
-  .sketch-btn:hover {
-    transform: translate(1px, 1px);
-    box-shadow: 2px 2px 0px hsl(var(--border));
-  }
-
-  .sketch-btn:active {
-    transform: translate(3px, 3px);
-    box-shadow: none;
+  .gold-gradient-text {
+    background: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
