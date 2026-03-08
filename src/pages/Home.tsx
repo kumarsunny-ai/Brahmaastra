@@ -165,28 +165,40 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Studio Roadmap */}
+      {/* Studio Roadmap — Game Pipeline */}
       <section className="py-24 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <SectionHeading title="Studio Roadmap" subtitle="Where we're headed" />
-          <div className="grid sm:grid-cols-2 gap-5">
-            {roadmap.map((item, i) => (
+        <div className="container mx-auto max-w-5xl">
+          <SectionHeading title="Studio Roadmap" subtitle="Our game pipeline at a glance" />
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { label: "Playable Now", color: "bg-accent", games: [{ emoji: "🏏", title: "Gilli Panda", slug: "gilli-panda" }] },
+              { label: "In Development", color: "bg-primary", games: [{ emoji: "🛺", title: "AutoRickshaw Rampage", slug: "autorickshaw-rampage" }, { emoji: "📦", title: "Dabba Dash", slug: "dabba-dash" }] },
+              { label: "Concept Stage", color: "bg-muted-foreground", games: [{ emoji: "☕", title: "Chai Tapper", slug: "chai-tapper" }, { emoji: "🚇", title: "Metro Surfers", slug: "metro-surfers" }] },
+            ].map((group, gi) => (
               <motion.div
-                key={item.title}
+                key={group.label}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                custom={i}
+                custom={gi}
                 variants={fadeUp}
-                className="bg-card border border-border/50 rounded-xl p-6 flex gap-4 items-start hover:border-primary/20 transition-all duration-300"
+                className="bg-card border border-border/50 rounded-xl p-6"
               >
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg gradient-bg text-primary-foreground flex items-center justify-center">
-                  <item.icon size={20} />
+                <div className="flex items-center gap-2 mb-5">
+                  <span className={`w-2.5 h-2.5 rounded-full ${group.color}`} />
+                  <h3 className="font-display text-sm font-bold text-foreground uppercase tracking-wide">{group.label}</h3>
                 </div>
-                <div>
-                  <span className="text-xs font-medium text-primary">{item.label}</span>
-                  <h3 className="font-display text-base font-bold text-foreground">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm mt-1">{item.desc}</p>
+                <div className="space-y-3">
+                  {group.games.map((game) => (
+                    <Link
+                      key={game.slug}
+                      to={`/games/${game.slug}`}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-secondary/40 border border-border/30 hover:border-primary/30 transition-all duration-200 group"
+                    >
+                      <span className="text-2xl">{game.emoji}</span>
+                      <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{game.title}</span>
+                    </Link>
+                  ))}
                 </div>
               </motion.div>
             ))}
