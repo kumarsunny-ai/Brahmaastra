@@ -7,6 +7,7 @@ import AutoRickshawGame from "@/components/AutoRickshawGame";
 import ChaiTapperGame from "@/components/ChaiTapperGame";
 import DabbaDashGame from "@/components/DabbaDashGame";
 import MetroSurfersGame from "@/components/MetroSurfersGame";
+import KanchaMastersGame from "@/components/KanchaMastersGame";
 import Leaderboard from "@/components/Leaderboard";
 import ScoreSubmitModal from "@/components/ScoreSubmitModal";
 import { getGameBySlug } from "@/data/games";
@@ -95,6 +96,7 @@ const Play = () => {
     "chai-tapper": <ChaiTapperGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
     "dabba-dash": <DabbaDashGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
     "metro-surfers": <MetroSurfersGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
+    "kancha-masters": <KanchaMastersGame onGameOver={handleGameOver} inputBlocked={showSubmit} />,
   };
 
   const gameComponent = gameComponents[resolvedSlug];
