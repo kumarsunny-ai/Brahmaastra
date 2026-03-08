@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor } from "lucide-react";
 import GilliDandaGame from "@/components/GilliDandaGame";
 import { getGameBySlug } from "@/data/games";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const Play = () => {
   const { slug } = useParams<{ slug: string }>();
