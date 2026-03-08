@@ -41,6 +41,7 @@ const ScoreSubmitModal = ({ open, score, isNewRecord, onSubmit, onSkip }: ScoreS
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(`${shareText}\n${SHARE_URL}`);
+      trackEvent("score_shared", { method: "clipboard", score });
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
