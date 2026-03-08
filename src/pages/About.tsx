@@ -11,12 +11,12 @@ const About = () => {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
       <div className="container mx-auto max-w-3xl">
-        <SectionHeading title="About Brahmastra" subtitle="An indie studio on a mission to make games that matter." />
+        <SectionHeading title="About Brahmaastra" subtitle="An indie studio on a mission to make games that matter." />
 
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="prose prose-invert max-w-none mb-16">
           <div className="bg-card border border-border rounded-xl p-8 text-muted-foreground leading-relaxed space-y-4">
             <p>
-              Brahmastra is a small indie game studio building original, fun games inspired by Indian culture and designed for players everywhere.
+              Brahmaastra is a small indie game studio building original, fun games inspired by Indian culture and designed for players everywhere.
             </p>
             <p>
               We believe the best games come from real stories, rich traditions, and a deep love for play. Our first title, <strong className="text-foreground">Gilli Panda</strong>, reimagines the ancient Indian sport of Gilli-Danda as a fun, fast browser game.

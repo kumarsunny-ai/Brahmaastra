@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <Link to="/" className="logo-text text-lg flex items-center gap-2 mb-3">
               <span className="text-xl">⚡</span>
-              BRAHMASTRA
+              BRAHMAASTRA
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
               An indie game studio crafting handcrafted games with desi soul and global fun.
@@ -35,7 +35,7 @@ const Footer = () => {
 
         <div className="mt-12 pt-6 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-xs">
-            © {new Date().getFullYear()} Brahmastra. All rights reserved.
+            © {new Date().getFullYear()} Brahmaastra. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200" aria-label="Twitter">Twitter</a>
