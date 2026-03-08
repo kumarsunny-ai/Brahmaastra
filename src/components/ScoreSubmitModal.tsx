@@ -64,6 +64,7 @@ const ScoreSubmitModal = ({ open, score, isNewRecord, onSubmit, onSkip }: ScoreS
           text: shareText,
           url: SHARE_URL,
         });
+        trackEvent("score_shared", { method: "native", score });
       } catch {
         // User cancelled share — do nothing
       }

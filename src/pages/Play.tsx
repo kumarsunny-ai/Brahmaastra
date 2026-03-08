@@ -24,6 +24,10 @@ const Play = () => {
 
   useDocumentTitle(game ? `Play ${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
 
+  useEffect(() => {
+    if (resolvedSlug === "gilli-panda") trackEvent("gilli_panda_play_view");
+  }, [resolvedSlug]);
+
   const isSupported = typeof window !== "undefined" && !!window.requestAnimationFrame && !!window.HTMLCanvasElement;
 
   const handleGameOver = useCallback((score: number) => {

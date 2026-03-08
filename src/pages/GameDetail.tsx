@@ -17,6 +17,10 @@ const GameDetail = () => {
 
   useDocumentTitle(game ? `${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
 
+  useEffect(() => {
+    if (game && game.slug === "gilli-panda") trackEvent("gilli_panda_detail_view");
+  }, [game]);
+
   if (!game) return <Navigate to="/games" replace />;
 
   const style = statusConfig[game.status];
