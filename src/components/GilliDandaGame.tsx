@@ -50,7 +50,7 @@ interface GilliDandaGameProps {
 }
 
 /* ─── Main Component ─── */
-const GilliDandaGame = ({ onGameOver }: GilliDandaGameProps) => {
+const GilliDandaGame = ({ onGameOver, inputBlocked }: GilliDandaGameProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
