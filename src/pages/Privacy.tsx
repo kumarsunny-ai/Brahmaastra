@@ -20,6 +20,7 @@ const Privacy = () => {
         <p>For privacy-related inquiries, email us at hello@brahmaastra.com.</p>
       </div>
     </div>
+  </div>
   );
 };
 

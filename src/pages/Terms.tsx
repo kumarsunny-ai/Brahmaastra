@@ -22,6 +22,7 @@ const Terms = () => {
         <p>Questions? Reach us at hello@brahmaastra.com.</p>
       </div>
     </div>
+  </div>
   );
 };
 
