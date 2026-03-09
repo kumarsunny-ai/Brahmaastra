@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { sfxHit, sfxMiss, sfxPerfect, sfxGameOver, sfxStart, sfxWhoosh } from "@/lib/sounds";
 
 /* ─── Types ─── */
 type Phase = "ready" | "angle" | "gilliUp" | "power" | "flying" | "result" | "gameover";
