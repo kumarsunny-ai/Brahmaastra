@@ -245,7 +245,7 @@ const HeroIntro = () => {
                 whileHover={{ scale: 1.08, borderColor: "hsl(var(--primary) / 0.5)" }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 border border-border/40 text-sm text-foreground backdrop-blur-sm transition-colors cursor-default"
               >
-                <span className="text-lg">{game.emoji}</span>
+                <img src={gameIcons[game.slug]} alt="" className="w-6 h-6 object-contain" />
                 <span className="hidden sm:inline">{game.name}</span>
               </motion.span>
             ))}
