@@ -97,7 +97,7 @@ const GameShowcaseCard = ({ game, index }: GameShowcaseCardProps) => {
             {game.description}
           </p>
           <div className="flex items-center gap-3 flex-wrap">
-            {game.playable && (
+            {game.status === "playable" && (
               <span className="inline-flex items-center px-4 py-2 rounded-full gradient-bg text-primary-foreground text-sm font-medium">
                 Play Now →
               </span>
