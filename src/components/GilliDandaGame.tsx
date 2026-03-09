@@ -770,6 +770,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
             st.moodTimer = 90;
           } else if (distance > 85) {
             st.mood = "perfect";
+            sfxPerfect();
           } else if (distance > 50) {
             st.mood = "happy";
           } else {
