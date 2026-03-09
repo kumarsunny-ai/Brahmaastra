@@ -380,6 +380,7 @@ export default function MetroSurfersGame({ onGameOver, inputBlocked }: Props) {
                 setUiState("gameover");
                 setScore(s.score);
                 onGameOver?.(s.score);
+                sfxGameOver();
               }
             }
           }
