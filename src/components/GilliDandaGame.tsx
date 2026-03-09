@@ -626,6 +626,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
       const aPrec = 1 - Math.abs(st.angleMeter - 0.5) * 2;
       st.gilliUpVY = -7 - aPrec * 5;
       st.phase = "gilliUp";
+      sfxHit();
       st.mood = "swing";
       st.swingTarget = 0.6;
       burst(GILLI_X, GILLI_Y, "#d4a855", 10);
