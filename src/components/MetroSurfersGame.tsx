@@ -372,6 +372,7 @@ export default function MetroSurfersGame({ onGameOver, inputBlocked }: Props) {
               s.action = "hit";
               s.invincible = 1.5;
               addParticles(s.laneX, PLAYER_Y, "#FF4444", 15);
+              sfxMiss();
               o.x = -200; // remove
               if (s.lives <= 0) {
                 s.state = "gameover";
