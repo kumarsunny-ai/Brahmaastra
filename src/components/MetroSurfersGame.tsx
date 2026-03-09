@@ -194,6 +194,7 @@ export default function MetroSurfersGame({ onGameOver, inputBlocked }: Props) {
     s.spawnTimer = 0; s.tokenTimer = 0; s.invincible = 0;
     setUiState("playing");
     setScore(0);
+    sfxStart();
   }, []);
 
   const changeLane = useCallback((dir: -1 | 1) => {
