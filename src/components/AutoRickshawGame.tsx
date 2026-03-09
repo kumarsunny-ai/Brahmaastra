@@ -570,6 +570,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
             if (c.type === "coin") {
               s.fares += 1;
               addParticles(c.x, c.y, "#FFD700", 8);
+              sfxCollect();
             } else if (c.type === "fare") {
               s.fares += 5;
               addParticles(c.x, c.y, "#90EE90", 12);
