@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { type GameData, statusConfig } from "@/data/games";
+import { gameIcons } from "@/assets/icons";
 
 type GameCardProps = GameData;
 
 const GameCard = ({ slug, title, description, status, statusLabel, ctaLabel, emoji, featured, tags }: GameCardProps) => {
   const style = statusConfig[status];
   const isPlayable = status === "playable";
+  const iconSrc = gameIcons[slug];
 
   return (
     <motion.div
@@ -34,11 +36,19 @@ const GameCard = ({ slug, title, description, status, statusLabel, ctaLabel, emo
         )}
 
         <motion.div
-          className="text-5xl mb-4"
+          className="mb-4"
           animate={featured ? { y: [0, -4, 0] } : {}}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          {emoji}
+          {iconSrc ? (
+            <img
+              src={iconSrc}
+              alt={`${title} icon`}
+              className="w-16 h-16 object-contain drop-shadow-[0_0_12px_hsl(var(--primary)/0.3)]"
+            />
+          ) : (
+            <span className="text-5xl">{emoji}</span>
+          )}
         </motion.div>
 
         <div className="flex items-center gap-3 mb-2">

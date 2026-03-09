@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { games } from "@/data/games";
+import { gameIcons } from "@/assets/icons";
 
 const showcaseGames = games.filter((g) => g.status === "playable").slice(0, 4);
 
