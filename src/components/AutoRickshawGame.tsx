@@ -549,6 +549,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
                 setUiState("gameover");
                 setScore(s.score);
                 onGameOver?.(s.score);
+                sfxGameOver();
               }
             }
           } else if (v.x < s.rickX - 40 && !v.passed) {
