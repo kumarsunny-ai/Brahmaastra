@@ -393,6 +393,7 @@ const KanchaMastersGame = ({ onGameOver, inputBlocked }: Props) => {
             s.powerUpTimer = 300;
             if (pu.type === "bigshooter") s.shooter.radius = 15;
             spawnParticles(pu.x, pu.y, "#fbbf24", 10);
+            sfxPowerUp();
           }
         });
 
