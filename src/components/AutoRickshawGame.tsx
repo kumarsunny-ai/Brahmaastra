@@ -539,6 +539,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
               s.lives--;
               s.hitFlash = 0.5;
               s.invincibleTime = 1.5;
+              sfxMiss();
               s.combo = 0;
               addParticles(s.rickX, s.laneY, "#FF4444", 20);
               setLives(s.lives);
