@@ -314,6 +314,7 @@ export default function DabbaDashGame({ onGameOver, inputBlocked }: Props) {
             if (d.currentPathIdx >= d.path.length - 1) {
               d.delivered = true;
               d.currentPathIdx = d.path.length - 1;
+              sfxCollect();
               const pts = Math.floor(100 + (s.timer / 60) * 50);
               s.score += pts;
               s.totalDelivered++;
