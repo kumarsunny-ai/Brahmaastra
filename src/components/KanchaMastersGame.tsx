@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback, useState } from "react";
+import { sfxKnock, sfxPowerUp, sfxHit, sfxGameOver, sfxStart, sfxLevelComplete } from "@/lib/sounds";
 
 interface Props {
   onGameOver: (score: number) => void;

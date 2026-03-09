@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react";
+import { sfxCollect, sfxLevelComplete, sfxGameOver, sfxStart } from "@/lib/sounds";
 
 /* ─── Types ─── */
 type GameState = "ready" | "playing" | "levelComplete" | "gameover";
