@@ -652,6 +652,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
       };
       st.swingTarget = -1.5;
       st.phase = "flying";
+      sfxWhoosh();
       st.mood = "focus";
       burst(GILLI_X, st.gilliUpY, colRef.current.accent, 15);
       st.flashTimer = 6;
