@@ -183,6 +183,7 @@ const KanchaMastersGame = ({ onGameOver, inputBlocked }: Props) => {
     s.phase = "shooting";
     s.shotsTaken++;
     setPhase("shooting");
+    sfxHit();
   }, []);
 
   const handleClick = useCallback(() => {
