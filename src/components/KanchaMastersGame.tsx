@@ -211,6 +211,7 @@ const KanchaMastersGame = ({ onGameOver, inputBlocked }: Props) => {
       stateRef.current.round = 1;
       setScore(0);
       initRound(1);
+      sfxStart();
     }
   }, [inputBlocked, shoot, initRound, onGameOver]);
 
