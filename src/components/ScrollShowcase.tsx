@@ -85,7 +85,7 @@ const GameShowcaseCard = ({ game, index }: GameShowcaseCardProps) => {
       className={`${index % 2 === 1 ? "md:mt-16" : ""}`}
     >
       <Link
-        to={game.playable ? `/play/${game.slug}` : `/games/${game.slug}`}
+        to={game.status === "playable" ? `/play/${game.slug}` : `/games/${game.slug}`}
         className="group block featured-card rounded-2xl md:rounded-3xl overflow-hidden border border-border/30 hover:border-primary/20 transition-all duration-500"
       >
         <div className="p-8 md:p-10">
