@@ -27,6 +27,7 @@ const Play = () => {
   const [showSubmit, setShowSubmit] = useState(false);
   const [lastScore, setLastScore] = useState(0);
   const [isNewRecord, setIsNewRecord] = useState(false);
+  const [soundMuted, setSoundMuted] = useState(isMuted());
 
   useDocumentTitle(game ? `Play ${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
 
