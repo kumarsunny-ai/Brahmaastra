@@ -345,6 +345,7 @@ export default function DabbaDashGame({ onGameOver, inputBlocked }: Props) {
           setUiState("gameover");
           setScore(s.score);
           onGameOver?.(s.score);
+          sfxGameOver();
         }
 
         // Particles
