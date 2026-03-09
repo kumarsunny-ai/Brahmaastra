@@ -91,7 +91,7 @@ const GameShowcaseCard = ({ game, index }: GameShowcaseCardProps) => {
       >
         <div className="p-8 md:p-10">
           {gameIcons[game.slug] ? (
-            <img src={gameIcons[game.slug]} alt={`${game.title} icon`} className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-[0_0_16px_hsl(var(--primary)/0.3)] mb-6" />
+            <img src={gameIcons[game.slug]} alt={`${game.title} icon`} className="w-16 h-16 md:w-20 md:h-20 object-contain icon-glow mb-6" />
           ) : (
             <span className="text-5xl md:text-6xl block mb-6">{game.emoji}</span>
           )}

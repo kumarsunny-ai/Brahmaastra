@@ -40,11 +40,11 @@ const GameCard = ({ slug, title, description, status, statusLabel, ctaLabel, emo
           animate={featured ? { y: [0, -4, 0] } : {}}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          {iconSrc ? (
+        {iconSrc ? (
             <img
               src={iconSrc}
               alt={`${title} icon`}
-              className="w-16 h-16 object-contain drop-shadow-[0_0_12px_hsl(var(--primary)/0.3)]"
+              className="w-16 h-16 object-contain icon-glow"
             />
           ) : (
             <span className="text-5xl">{emoji}</span>
