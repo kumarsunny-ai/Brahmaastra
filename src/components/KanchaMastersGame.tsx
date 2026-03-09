@@ -204,6 +204,7 @@ const KanchaMastersGame = ({ onGameOver, inputBlocked }: Props) => {
         s.phase = "gameOver";
         setPhase("gameOver");
         onGameOver(s.score);
+        sfxGameOver();
       }
     } else if (s.phase === "gameOver") {
       stateRef.current.score = 0;
