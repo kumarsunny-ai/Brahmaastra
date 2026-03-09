@@ -400,6 +400,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
     s.lane = newLane;
     s.targetLane = newLane;
     s.tilt = dir * 1.5;
+    sfxWhoosh();
   }, []);
 
   // Input handling
