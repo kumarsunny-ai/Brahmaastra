@@ -160,10 +160,12 @@ export default function ChaiTapperGame({ onGameOver, inputBlocked }: Props) {
       // Remove from queue
       s.orders = s.orders.filter(o => o.id !== order.id);
       s.currentOrder = s.orders.length > 0 ? s.orders[0] : null;
+      sfxCollect();
     } else {
       addParticles(400, 200, "#FF4444", 10, "Wrong!");
       s.combo = 0;
       s.shakeX = 10;
+      sfxMiss();
     }
     s.addedIngredients = [];
     setScore(s.score);
