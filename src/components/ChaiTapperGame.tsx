@@ -178,6 +178,7 @@ export default function ChaiTapperGame({ onGameOver, inputBlocked }: Props) {
     s.addedIngredients.push(ingredient);
     s.potBubble = 1;
     addParticles(400, 340, INGREDIENT_INFO[ingredient].color, 5);
+    sfxTap();
 
     // Auto-serve when all ingredients added
     if (s.addedIngredients.length >= s.currentOrder.ingredients.length) {
