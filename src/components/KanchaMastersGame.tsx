@@ -378,6 +378,7 @@ const KanchaMastersGame = ({ onGameOver, inputBlocked }: Props) => {
             s.comboText = s.combo > 1 ? `${s.combo}x COMBO! +${points}` : `+${points}`;
             s.comboTimer = 60;
             spawnParticles(m.x, m.y, m.glow, 12);
+            sfxKnock();
           }
         });
 
