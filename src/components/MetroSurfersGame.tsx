@@ -395,6 +395,7 @@ export default function MetroSurfersGame({ onGameOver, inputBlocked }: Props) {
             if (c.type === "token") {
               s.tokens++;
               addParticles(c.x, c.y, "#FFD700", 5);
+              sfxCollect();
             } else if (c.type === "magnet") {
               s.magnetTime = 8;
               addParticles(c.x, c.y, "#FF4444", 8);
