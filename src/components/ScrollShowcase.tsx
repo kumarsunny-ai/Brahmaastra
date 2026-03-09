@@ -90,7 +90,11 @@ const GameShowcaseCard = ({ game, index }: GameShowcaseCardProps) => {
         className="group block featured-card rounded-2xl md:rounded-3xl overflow-hidden border border-border/30 hover:border-primary/20 transition-all duration-500"
       >
         <div className="p-8 md:p-10">
-          <span className="text-5xl md:text-6xl block mb-6">{game.emoji}</span>
+          {gameIcons[game.slug] ? (
+            <img src={gameIcons[game.slug]} alt={`${game.title} icon`} className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-[0_0_16px_hsl(var(--primary)/0.3)] mb-6" />
+          ) : (
+            <span className="text-5xl md:text-6xl block mb-6">{game.emoji}</span>
+          )}
           <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
             {game.title}
           </h3>
