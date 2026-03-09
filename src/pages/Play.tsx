@@ -134,12 +134,21 @@ const Play = () => {
           <div className="flex items-center gap-2">
             <span className="text-sm font-display font-bold text-foreground">{game.emoji} {game.title}</span>
           </div>
-          <a
-            href="mailto:bugs@brahmaastra.com?subject=Bug Report: Gilli Panda"
-            className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Bug size={14} /> Report Bug
-          </a>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSoundMuted(toggleMute())}
+              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-foreground transition-colors"
+              title={soundMuted ? "Unmute sounds" : "Mute sounds"}
+            >
+              {soundMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+            </button>
+            <a
+              href="mailto:bugs@brahmaastra.com?subject=Bug Report: Gilli Panda"
+              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Bug size={14} /> Report Bug
+            </a>
+          </div>
         </div>
       </div>
 
