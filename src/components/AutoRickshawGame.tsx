@@ -578,6 +578,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
               s.shieldTime = 8;
               addParticles(c.x, c.y, "#4169E1", 10);
               setShieldActive(true);
+              sfxPowerUp();
             } else if (c.type === "magnet") {
               s.magnetTime = 6;
               addParticles(c.x, c.y, "#FF4444", 10);
