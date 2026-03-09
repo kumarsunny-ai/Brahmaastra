@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react";
+import { sfxCollect, sfxPowerUp, sfxMiss, sfxGameOver, sfxStart, sfxWhoosh } from "@/lib/sounds";
 
 /* ─── Types ─── */
 type GameState = "ready" | "playing" | "gameover";
@@ -389,6 +390,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
     setScore(0);
     setCombo(0);
     setShieldActive(false);
+    sfxStart();
   }, []);
 
   const changeLane = useCallback((dir: -1 | 1) => {
@@ -398,6 +400,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
     s.lane = newLane;
     s.targetLane = newLane;
     s.tilt = dir * 1.5;
+    sfxWhoosh();
   }, []);
 
   // Input handling
@@ -536,6 +539,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
               s.lives--;
               s.hitFlash = 0.5;
               s.invincibleTime = 1.5;
+              sfxMiss();
               s.combo = 0;
               addParticles(s.rickX, s.laneY, "#FF4444", 20);
               setLives(s.lives);
@@ -545,6 +549,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
                 setUiState("gameover");
                 setScore(s.score);
                 onGameOver?.(s.score);
+                sfxGameOver();
               }
             }
           } else if (v.x < s.rickX - 40 && !v.passed) {
@@ -565,6 +570,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
             if (c.type === "coin") {
               s.fares += 1;
               addParticles(c.x, c.y, "#FFD700", 8);
+              sfxCollect();
             } else if (c.type === "fare") {
               s.fares += 5;
               addParticles(c.x, c.y, "#90EE90", 12);
@@ -572,6 +578,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
               s.shieldTime = 8;
               addParticles(c.x, c.y, "#4169E1", 10);
               setShieldActive(true);
+              sfxPowerUp();
             } else if (c.type === "magnet") {
               s.magnetTime = 6;
               addParticles(c.x, c.y, "#FF4444", 10);

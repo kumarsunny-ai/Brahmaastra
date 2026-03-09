@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { sfxHit, sfxMiss, sfxPerfect, sfxGameOver, sfxStart, sfxWhoosh } from "@/lib/sounds";
 
 /* ─── Types ─── */
 type Phase = "ready" | "angle" | "gilliUp" | "power" | "flying" | "result" | "gameover";
@@ -615,6 +616,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
 
     if (st.phase === "ready" || st.phase === "gameover") {
       startGame();
+      sfxStart();
       return;
     }
 
@@ -624,6 +626,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
       const aPrec = 1 - Math.abs(st.angleMeter - 0.5) * 2;
       st.gilliUpVY = -7 - aPrec * 5;
       st.phase = "gilliUp";
+      sfxHit();
       st.mood = "swing";
       st.swingTarget = 0.6;
       burst(GILLI_X, GILLI_Y, "#d4a855", 10);
@@ -649,6 +652,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
       };
       st.swingTarget = -1.5;
       st.phase = "flying";
+      sfxWhoosh();
       st.mood = "focus";
       burst(GILLI_X, st.gilliUpY, colRef.current.accent, 15);
       st.flashTimer = 6;
@@ -664,6 +668,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
       if (st.round >= ROUNDS) {
         st.phase = "gameover";
         st.mood = "idle";
+        sfxGameOver();
         if (st.totalScore > st.bestScore) {
           st.bestScore = st.totalScore;
           localStorage.setItem("gilliPanda_best", String(st.totalScore));
@@ -745,6 +750,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
             obs.hit = true;
             st.hitObstacle = obs;
             burst(obs.x - st.camX, GY - 20, "#ff6b6b", 12);
+            sfxMiss();
           }
         }
 
@@ -765,6 +771,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
             st.moodTimer = 90;
           } else if (distance > 85) {
             st.mood = "perfect";
+            sfxPerfect();
           } else if (distance > 50) {
             st.mood = "happy";
           } else {

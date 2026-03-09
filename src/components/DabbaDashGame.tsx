@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react";
+import { sfxCollect, sfxLevelComplete, sfxGameOver, sfxStart } from "@/lib/sounds";
 
 /* ─── Types ─── */
 type GameState = "ready" | "playing" | "levelComplete" | "gameover";
@@ -197,6 +198,7 @@ export default function DabbaDashGame({ onGameOver, inputBlocked }: Props) {
     initLevel(1);
     setUiState("playing");
     setScore(0);
+    sfxStart();
   }, [initLevel]);
 
   const startDeliveries = useCallback(() => {
@@ -312,6 +314,7 @@ export default function DabbaDashGame({ onGameOver, inputBlocked }: Props) {
             if (d.currentPathIdx >= d.path.length - 1) {
               d.delivered = true;
               d.currentPathIdx = d.path.length - 1;
+              sfxCollect();
               const pts = Math.floor(100 + (s.timer / 60) * 50);
               s.score += pts;
               s.totalDelivered++;
@@ -333,6 +336,7 @@ export default function DabbaDashGame({ onGameOver, inputBlocked }: Props) {
             s.state = "levelComplete";
             setUiState("levelComplete");
             setScore(s.score);
+            sfxLevelComplete();
           }
         }
 
@@ -341,6 +345,7 @@ export default function DabbaDashGame({ onGameOver, inputBlocked }: Props) {
           setUiState("gameover");
           setScore(s.score);
           onGameOver?.(s.score);
+          sfxGameOver();
         }
 
         // Particles

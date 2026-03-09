@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react";
+import { sfxCollect, sfxPowerUp, sfxMiss, sfxGameOver, sfxStart, sfxWhoosh } from "@/lib/sounds";
 
 /* ─── Types ─── */
 type GameState = "ready" | "playing" | "gameover";
@@ -193,6 +194,7 @@ export default function MetroSurfersGame({ onGameOver, inputBlocked }: Props) {
     s.spawnTimer = 0; s.tokenTimer = 0; s.invincible = 0;
     setUiState("playing");
     setScore(0);
+    sfxStart();
   }, []);
 
   const changeLane = useCallback((dir: -1 | 1) => {
@@ -370,6 +372,7 @@ export default function MetroSurfersGame({ onGameOver, inputBlocked }: Props) {
               s.action = "hit";
               s.invincible = 1.5;
               addParticles(s.laneX, PLAYER_Y, "#FF4444", 15);
+              sfxMiss();
               o.x = -200; // remove
               if (s.lives <= 0) {
                 s.state = "gameover";
@@ -377,6 +380,7 @@ export default function MetroSurfersGame({ onGameOver, inputBlocked }: Props) {
                 setUiState("gameover");
                 setScore(s.score);
                 onGameOver?.(s.score);
+                sfxGameOver();
               }
             }
           }
@@ -391,9 +395,11 @@ export default function MetroSurfersGame({ onGameOver, inputBlocked }: Props) {
             if (c.type === "token") {
               s.tokens++;
               addParticles(c.x, c.y, "#FFD700", 5);
+              sfxCollect();
             } else if (c.type === "magnet") {
               s.magnetTime = 8;
               addParticles(c.x, c.y, "#FF4444", 8);
+              sfxPowerUp();
             } else if (c.type === "multiplier") {
               s.multiplier = 2;
               s.multiplierTime = 10;

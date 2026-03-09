@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor } from "lucide-react";
+import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor, Volume2, VolumeX } from "lucide-react";
+import { isMuted, toggleMute } from "@/lib/sounds";
 import GilliDandaGame from "@/components/GilliDandaGame";
 import AutoRickshawGame from "@/components/AutoRickshawGame";
 import ChaiTapperGame from "@/components/ChaiTapperGame";
@@ -26,6 +27,7 @@ const Play = () => {
   const [showSubmit, setShowSubmit] = useState(false);
   const [lastScore, setLastScore] = useState(0);
   const [isNewRecord, setIsNewRecord] = useState(false);
+  const [soundMuted, setSoundMuted] = useState(isMuted());
 
   useDocumentTitle(game ? `Play ${game.title} — Brahmaastra` : "Game Not Found — Brahmaastra");
 
@@ -132,12 +134,21 @@ const Play = () => {
           <div className="flex items-center gap-2">
             <span className="text-sm font-display font-bold text-foreground">{game.emoji} {game.title}</span>
           </div>
-          <a
-            href="mailto:bugs@brahmaastra.com?subject=Bug Report: Gilli Panda"
-            className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Bug size={14} /> Report Bug
-          </a>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSoundMuted(toggleMute())}
+              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-foreground transition-colors"
+              title={soundMuted ? "Unmute sounds" : "Mute sounds"}
+            >
+              {soundMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+            </button>
+            <a
+              href="mailto:bugs@brahmaastra.com?subject=Bug Report: Gilli Panda"
+              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Bug size={14} /> Report Bug
+            </a>
+          </div>
         </div>
       </div>
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react";
+import { sfxTap, sfxCollect, sfxMiss, sfxGameOver, sfxStart, sfxLevelComplete } from "@/lib/sounds";
 
 /* ─── Types ─── */
 type GameState = "ready" | "playing" | "gameover";
@@ -119,6 +120,7 @@ export default function ChaiTapperGame({ onGameOver, inputBlocked }: Props) {
     s.orderIdCounter = 0;
     setUiState("playing");
     setScore(0);
+    sfxStart();
   }, []);
 
   const serveOrder = useCallback(() => {
@@ -158,10 +160,12 @@ export default function ChaiTapperGame({ onGameOver, inputBlocked }: Props) {
       // Remove from queue
       s.orders = s.orders.filter(o => o.id !== order.id);
       s.currentOrder = s.orders.length > 0 ? s.orders[0] : null;
+      sfxCollect();
     } else {
       addParticles(400, 200, "#FF4444", 10, "Wrong!");
       s.combo = 0;
       s.shakeX = 10;
+      sfxMiss();
     }
     s.addedIngredients = [];
     setScore(s.score);
@@ -174,6 +178,7 @@ export default function ChaiTapperGame({ onGameOver, inputBlocked }: Props) {
     s.addedIngredients.push(ingredient);
     s.potBubble = 1;
     addParticles(400, 340, INGREDIENT_INFO[ingredient].color, 5);
+    sfxTap();
 
     // Auto-serve when all ingredients added
     if (s.addedIngredients.length >= s.currentOrder.ingredients.length) {
@@ -299,6 +304,7 @@ export default function ChaiTapperGame({ onGameOver, inputBlocked }: Props) {
           setUiState("gameover");
           setScore(s.score);
           onGameOver?.(s.score);
+          sfxGameOver();
         }
 
         // Shake

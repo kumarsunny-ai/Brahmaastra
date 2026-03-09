@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback, useState } from "react";
+import { sfxKnock, sfxPowerUp, sfxHit, sfxGameOver, sfxStart, sfxLevelComplete } from "@/lib/sounds";
 
 interface Props {
   onGameOver: (score: number) => void;
@@ -182,6 +183,7 @@ const KanchaMastersGame = ({ onGameOver, inputBlocked }: Props) => {
     s.phase = "shooting";
     s.shotsTaken++;
     setPhase("shooting");
+    sfxHit();
   }, []);
 
   const handleClick = useCallback(() => {
@@ -202,12 +204,14 @@ const KanchaMastersGame = ({ onGameOver, inputBlocked }: Props) => {
         s.phase = "gameOver";
         setPhase("gameOver");
         onGameOver(s.score);
+        sfxGameOver();
       }
     } else if (s.phase === "gameOver") {
       stateRef.current.score = 0;
       stateRef.current.round = 1;
       setScore(0);
       initRound(1);
+      sfxStart();
     }
   }, [inputBlocked, shoot, initRound, onGameOver]);
 
@@ -374,6 +378,7 @@ const KanchaMastersGame = ({ onGameOver, inputBlocked }: Props) => {
             s.comboText = s.combo > 1 ? `${s.combo}x COMBO! +${points}` : `+${points}`;
             s.comboTimer = 60;
             spawnParticles(m.x, m.y, m.glow, 12);
+            sfxKnock();
           }
         });
 
@@ -388,6 +393,7 @@ const KanchaMastersGame = ({ onGameOver, inputBlocked }: Props) => {
             s.powerUpTimer = 300;
             if (pu.type === "bigshooter") s.shooter.radius = 15;
             spawnParticles(pu.x, pu.y, "#fbbf24", 10);
+            sfxPowerUp();
           }
         });
 
