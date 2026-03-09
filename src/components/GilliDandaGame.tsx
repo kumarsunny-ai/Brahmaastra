@@ -668,6 +668,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
       if (st.round >= ROUNDS) {
         st.phase = "gameover";
         st.mood = "idle";
+        sfxGameOver();
         if (st.totalScore > st.bestScore) {
           st.bestScore = st.totalScore;
           localStorage.setItem("gilliPanda_best", String(st.totalScore));
