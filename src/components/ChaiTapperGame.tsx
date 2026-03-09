@@ -304,6 +304,7 @@ export default function ChaiTapperGame({ onGameOver, inputBlocked }: Props) {
           setUiState("gameover");
           setScore(s.score);
           onGameOver?.(s.score);
+          sfxGameOver();
         }
 
         // Shake
