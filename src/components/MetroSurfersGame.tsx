@@ -399,6 +399,7 @@ export default function MetroSurfersGame({ onGameOver, inputBlocked }: Props) {
             } else if (c.type === "magnet") {
               s.magnetTime = 8;
               addParticles(c.x, c.y, "#FF4444", 8);
+              sfxPowerUp();
             } else if (c.type === "multiplier") {
               s.multiplier = 2;
               s.multiplierTime = 10;
