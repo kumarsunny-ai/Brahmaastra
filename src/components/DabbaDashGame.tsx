@@ -198,6 +198,7 @@ export default function DabbaDashGame({ onGameOver, inputBlocked }: Props) {
     initLevel(1);
     setUiState("playing");
     setScore(0);
+    sfxStart();
   }, [initLevel]);
 
   const startDeliveries = useCallback(() => {
