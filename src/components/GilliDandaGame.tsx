@@ -616,6 +616,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
 
     if (st.phase === "ready" || st.phase === "gameover") {
       startGame();
+      sfxStart();
       return;
     }
 
