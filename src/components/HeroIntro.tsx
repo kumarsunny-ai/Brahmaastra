@@ -3,28 +3,25 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import heroCollage from "@/assets/hero-collage.jpg";
+import { gameIcons } from "@/assets/icons";
 
 const gameShowcase = [
-  { emoji: "🏏", name: "Gilli Panda", delay: 0.3 },
-  { emoji: "🛺", name: "AutoRickshaw Rampage", delay: 0.5 },
-  { emoji: "☕", name: "Chai Tapper", delay: 0.7 },
-  { emoji: "📦", name: "Dabba Dash", delay: 0.9 },
-  { emoji: "🚇", name: "Metro Surfers", delay: 1.1 },
-  { emoji: "🔮", name: "Kancha Masters", delay: 1.3 },
+  { slug: "gilli-panda", emoji: "🏏", name: "Gilli Panda", delay: 0.3 },
+  { slug: "autorickshaw-rampage", emoji: "🛺", name: "AutoRickshaw Rampage", delay: 0.5 },
+  { slug: "chai-tapper", emoji: "☕", name: "Chai Tapper", delay: 0.7 },
+  { slug: "dabba-dash", emoji: "📦", name: "Dabba Dash", delay: 0.9 },
+  { slug: "metro-surfers", emoji: "🚇", name: "Metro Surfers", delay: 1.1 },
+  { slug: "kancha-masters", emoji: "🔮", name: "Kancha Masters", delay: 1.3 },
 ];
 
 /* Floating game elements for the animated background */
 const floatingElements = [
-  { emoji: "🏏", x: "10%", y: "15%", size: 48, dur: 6, del: 0 },
-  { emoji: "🔮", x: "85%", y: "20%", size: 40, dur: 7, del: 0.5 },
-  { emoji: "🛺", x: "75%", y: "70%", size: 52, dur: 5.5, del: 1 },
-  { emoji: "☕", x: "15%", y: "75%", size: 36, dur: 8, del: 0.3 },
-  { emoji: "📦", x: "50%", y: "85%", size: 32, dur: 6.5, del: 0.8 },
-  { emoji: "🚇", x: "90%", y: "50%", size: 44, dur: 7.5, del: 0.2 },
-  { emoji: "🎯", x: "25%", y: "45%", size: 28, dur: 9, del: 1.2 },
-  { emoji: "🪁", x: "65%", y: "30%", size: 36, dur: 6, del: 0.6 },
-  { emoji: "🎲", x: "40%", y: "65%", size: 30, dur: 8, del: 0.4 },
-  { emoji: "✨", x: "55%", y: "15%", size: 24, dur: 5, del: 0.9 },
+  { slug: "gilli-panda", x: "10%", y: "15%", size: 56, dur: 6, del: 0 },
+  { slug: "kancha-masters", x: "85%", y: "20%", size: 48, dur: 7, del: 0.5 },
+  { slug: "autorickshaw-rampage", x: "75%", y: "70%", size: 60, dur: 5.5, del: 1 },
+  { slug: "chai-tapper", x: "15%", y: "75%", size: 44, dur: 8, del: 0.3 },
+  { slug: "dabba-dash", x: "50%", y: "85%", size: 40, dur: 6.5, del: 0.8 },
+  { slug: "metro-surfers", x: "90%", y: "50%", size: 52, dur: 7.5, del: 0.2 },
 ];
 
 /* Particles that drift across the scene */
