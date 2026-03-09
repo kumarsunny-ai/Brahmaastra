@@ -120,6 +120,7 @@ export default function ChaiTapperGame({ onGameOver, inputBlocked }: Props) {
     s.orderIdCounter = 0;
     setUiState("playing");
     setScore(0);
+    sfxStart();
   }, []);
 
   const serveOrder = useCallback(() => {
