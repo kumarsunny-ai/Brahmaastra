@@ -390,6 +390,7 @@ export default function AutoRickshawGame({ onGameOver, inputBlocked }: Props) {
     setScore(0);
     setCombo(0);
     setShieldActive(false);
+    sfxStart();
   }, []);
 
   const changeLane = useCallback((dir: -1 | 1) => {
