@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor } from "lucide-react";
+import { ArrowLeft, AlertTriangle, Loader2, Home, Gamepad2, Bug, Play as PlayIcon, Keyboard, Monitor, Volume2, VolumeX } from "lucide-react";
+import { isMuted, toggleMute } from "@/lib/sounds";
 import GilliDandaGame from "@/components/GilliDandaGame";
 import AutoRickshawGame from "@/components/AutoRickshawGame";
 import ChaiTapperGame from "@/components/ChaiTapperGame";
