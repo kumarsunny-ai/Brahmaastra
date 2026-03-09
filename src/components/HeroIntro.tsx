@@ -103,12 +103,12 @@ const HeroIntro = () => {
                 rotate: { delay: el.del + 2, duration: el.dur * 1.2, repeat: Infinity, ease: "easeInOut" },
               }}
             >
-              <span
-                style={{ fontSize: el.size }}
-                className="drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]"
-              >
-                {el.emoji}
-              </span>
+              <img
+                src={gameIcons[el.slug]}
+                alt=""
+                style={{ width: el.size, height: el.size }}
+                className="object-contain drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+              />
             </motion.div>
           ))}
 
