@@ -336,6 +336,7 @@ export default function DabbaDashGame({ onGameOver, inputBlocked }: Props) {
             s.state = "levelComplete";
             setUiState("levelComplete");
             setScore(s.score);
+            sfxLevelComplete();
           }
         }
 
