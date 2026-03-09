@@ -749,6 +749,7 @@ const GilliDandaGame = ({ onGameOver, inputBlocked }: Props) => {
             obs.hit = true;
             st.hitObstacle = obs;
             burst(obs.x - st.camX, GY - 20, "#ff6b6b", 12);
+            sfxMiss();
           }
         }
 
